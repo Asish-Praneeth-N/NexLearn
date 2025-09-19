@@ -18,15 +18,18 @@ function Provider({ children }: { children: React.ReactNode }) {
         return;
       }
 
+      if (pathname.startsWith("/analytics") && userEmail !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
+        router.push("/dashboard");
+        return;
+      }
+
       CheckIsNewUser().then(() => {
-        if (userEmail && (userEmail === "vivek338614@gmail.com")) {
+        if (userEmail && userEmail === process.env.NEXT_PUBLIC_ADMIN_EMAIL && !pathname.startsWith("/analytics")) {
           router.push("/analytics");
         }
       });
     }
-    
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSignedIn, user, router, pathname]);
+ }, [isSignedIn, user, router, pathname]);
 
   const CheckIsNewUser = async () => {
     try {

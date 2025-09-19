@@ -10,7 +10,8 @@ export default function Page() {
   useEffect(() => {
     if (isSignedIn && user) {
       const userEmail = user.primaryEmailAddress?.emailAddress;
-      if (userEmail === "vivekvrc777@gmail.com") {
+      const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+      if (userEmail === adminEmail) {
         router.push("/analytics");
       } else {
         router.push("/dashboard");
