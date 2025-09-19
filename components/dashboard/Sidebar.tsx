@@ -25,7 +25,7 @@ const Sidebar = () => {
     <div className="h-screen bg-white/60 backdrop-blur-xl border-r border-slate-200 p-5 shadow-lg relative">
       <div className="flex gap-2 items-center">
         <Image src={"/logo.png"} width={55} height={55} alt="logo" />
-        <h2 className="font-extrabold text-2xl text-indigo-600">LearNova</h2>
+        <h2 className="font-extrabold text-2xl text-indigo-600">NexLearn</h2>
       </div>
 
       <div className="mt-8 space-y-4">

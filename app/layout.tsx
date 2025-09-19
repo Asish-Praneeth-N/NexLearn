@@ -8,9 +8,9 @@ import { Toaster } from "@/components/ui/sonner";
 const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "LearNova - AI powered learning platform",
+  title: "NexLearn - AI powered learning platform",
   description:
-    "LearNova is an AI powered learning platform that helps you learn better and faster.",
+    "NexLearn is an AI powered learning platform that helps you learn better and faster.",
 };
 
 export default function RootLayout({

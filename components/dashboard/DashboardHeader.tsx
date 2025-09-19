@@ -27,9 +27,9 @@ const DashboardHeader = () => {
             animate={{ opacity: 1, x: 0 }}
             className="flex gap-2 items-center cursor-pointer"
           >
-            <Image src="/logo.png" width={45} height={45} alt="LearNova logo" priority />
+            <Image src="/logo.png" width={45} height={45} alt="NexLearn logo" priority />
             <h2 className="font-extrabold text-2xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              LearNova
+              NexLearn
             </h2>
           </motion.div>
         </Link>

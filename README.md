@@ -18,6 +18,6 @@ A cutting-edge AI-powered learning platform designed to revolutionize education.
 - 💬 **Interactive Content** - Engaging lessons with real-time feedback
 
 ## 🚀 Getting Started
-Transform your learning experience with LearNova's innovative approach to education.
+Transform your learning experience with NexLearn's innovative approach to education.
 
 Happy learning! 🌟

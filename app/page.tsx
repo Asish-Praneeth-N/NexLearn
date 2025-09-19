@@ -5,7 +5,7 @@ import { Brain, BookOpen, Zap, Star, Menu, X, Play, ArrowRight, Sparkles } from 
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function LearnovaLanding() {
+export default function NexLearnLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -42,7 +42,7 @@ export default function LearnovaLanding() {
     {
       name: "Sarah Johnson",
       role: "Medical Student",
-      content: "Learnova's AI-generated flashcards helped me ace my anatomy exam. The content is always relevant and perfectly tailored.",
+      content: "NexLearn's AI-generated flashcards helped me ace my anatomy exam. The content is always relevant and perfectly tailored.",
       rating: 5
     },
     {
@@ -54,7 +54,7 @@ export default function LearnovaLanding() {
     {
       name: "Emma Davis",
       role: "Language Teacher",
-      content: "I use Learnova to create content for my students. The AI understands different learning levels perfectly.",
+      content: "I use NexLearn to create content for my students. The AI understands different learning levels perfectly.",
       rating: 5
     }
   ];
@@ -75,7 +75,7 @@ export default function LearnovaLanding() {
                 />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-black bg-clip-text text-transparent">
-                Learnova
+                NexLearn
               </span>
             </div>
             
@@ -161,7 +161,7 @@ export default function LearnovaLanding() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src="/hello.jpg" 
-                  alt="Learnova Learning Platform" 
+                  alt="NexLearn Learning Platform" 
                   className="w-full h-auto object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -254,7 +254,7 @@ export default function LearnovaLanding() {
                   <Sparkles className="w-5 h-5 text-white" />
                 </div>
                 <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-white bg-clip-text text-transparent">
-                  Learnova
+                  NexLearn
                 </span>
               </div>
               <p className="text-gray-400">
@@ -293,7 +293,7 @@ export default function LearnovaLanding() {
           </div>
           
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Learnova. All rights reserved. Built with AI-powered innovation.</p>
+            <p>&copy; 2025 NexLearn. All rights reserved. Built with AI-powered innovation.</p>
           </div>
         </div>
       </footer>
