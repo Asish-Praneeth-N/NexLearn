@@ -18,7 +18,7 @@ const LearningCardItem = ({
   item,
   studyTypeContent,
   course,
-  refreshData
+  refreshData,
 }: LearningCardItemProps) => {
   const [loading, setLoading] = useState(false);
 
@@ -26,20 +26,19 @@ const LearningCardItem = ({
     toast("Generating content...");
     setLoading(true);
 
-    let chapters = '';
+    let chapters = "";
     course?.courseLayout.chapters.forEach((chapter: any) => {
-      chapters = (chapter.chapter_title || chapter.chapterTitle) + ', ' + chapters;
+      chapters = (chapter.chapter_title || chapter.chapterTitle) + ", " + chapters;
     });
 
     try {
       await axios.post("/api/generate-study-type", {
         courseId: course?.courseId,
         type: item.type,
-        chapters: chapters
+        chapters: chapters,
       });
       toast.success("Content generation started!");
       setTimeout(refreshData, 3000);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("Generation failed");
     } finally {
@@ -50,21 +49,30 @@ const LearningCardItem = ({
   const isContentAvailable = studyTypeContent?.[item.type]?.length > 0;
 
   return (
-    <div className={`border shadow-md rounded-lg p-5 flex flex-col items-center h-full ${!isContentAvailable && "grayscale"}`}>
-      {!isContentAvailable ? (
-        <h2 className="p-1 px-2 bg-gray-500 text-white rounded-full text-[10px] mb-2">
-          Unavailable
-        </h2>
-      ) : (
-        <h2 className="p-1 px-2 bg-green-500 text-white rounded-full text-[10px] mb-2">
-          Available
-        </h2>
-      )}
+    <div
+      className={`flex flex-col items-center p-5 rounded-lg shadow-md h-full transition-colors ${
+        !isContentAvailable ? "grayscale" : ""
+      } bg-neutral-900 border border-neutral-800 hover:bg-neutral-800`}
+    >
+      {/* Availability Badge */}
+      <h2
+        className={`p-1 px-2 rounded-full text-[10px] mb-2 ${
+          isContentAvailable ? "bg-green-600 text-white" : "bg-neutral-700 text-white"
+        }`}
+      >
+        {isContentAvailable ? "Available" : "Unavailable"}
+      </h2>
+
+      {/* Icon */}
       <Image src={item.icon} alt={item.name} width={50} height={50} />
-      <h2 className="font-medium mt-3">{item.name}</h2>
-      <p className="text-gray-500 mb-4 text-center text-sm flex-grow">
-        {item.desc}
-      </p>
+
+      {/* Name */}
+      <h2 className="font-medium mt-3 text-white">{item.name}</h2>
+
+      {/* Description */}
+      <p className="text-neutral-400 mb-4 text-center text-sm flex-grow">{item.desc}</p>
+
+      {/* Action Button */}
       <div className="mt-auto w-full">
         {!isContentAvailable ? (
           <Button
@@ -72,15 +80,18 @@ const LearningCardItem = ({
               e.preventDefault();
               GenerateContent();
             }}
-            variant={"outline"}
-            className="w-full"
+            variant="outline"
+            className="w-full text-white border-white hover:bg-white hover:text-black"
             disabled={loading}
           >
             {loading && <RefreshCcw className="animate-spin mr-2 h-4 w-4" />}
             Generate
           </Button>
         ) : (
-          <Button variant={"outline"} className="w-full">
+          <Button
+            variant="outline"
+            className="w-full text-white border-white hover:bg-white hover:text-black"
+          >
             View
           </Button>
         )}

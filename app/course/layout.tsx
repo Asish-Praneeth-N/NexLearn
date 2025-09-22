@@ -9,7 +9,7 @@ const CourseViewLayout = ({ children }: { children: React.ReactNode }) => {
     const isNotesPage = pathname.includes('/notes')
     
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-black text-white">
             <DashboardHeader />
             <div className={
                 isNotesPage 

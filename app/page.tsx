@@ -68,7 +68,7 @@ export default function NexLearnLanding() {
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-neutral-900 rounded-lg flex items-center justify-center">
                 <Image
-                  src={'/logonex.png'}
+                  src={'/logonexbgrm.png'}
                   alt='logo'
                   width={40}
                   height={40}

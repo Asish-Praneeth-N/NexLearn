@@ -10,15 +10,17 @@ const Welcome = () => {
     <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
-                 text-white rounded-2xl shadow-xl relative overflow-hidden"
+      className="p-6 bg-neutral-900 text-white rounded-2xl shadow-xl relative overflow-hidden border border-neutral-800"
     >
-      <div className="absolute inset-0 bg-white/10 backdrop-blur-lg rounded-2xl" />
+      {/* Subtle overlay for depth */}
+      <div className="absolute inset-0 bg-white/5 backdrop-blur-sm rounded-2xl pointer-events-none" />
+      
       <h1 className="relative text-2xl md:text-4xl font-extrabold mb-2">
         👋 Welcome, {user?.fullName}!
       </h1>
-      <p className="relative md:text-lg text-sm text-white/90">
-        We&apos;re thrilled to have you at the <span className="font-semibold">AI Powered Learning Hub</span>. 🚀
+      <p className="relative md:text-lg text-sm text-neutral-400">
+        We&apos;re thrilled to have you at the{" "}
+        <span className="font-semibold text-white">AI Powered Learning Hub</span>. 🚀   
       </p>
     </motion.div>
   );

@@ -22,21 +22,21 @@ const Sidebar = () => {
   const path = usePathname();
 
   return (
-    <div className="h-screen bg-white/60 backdrop-blur-xl border-r border-slate-200 p-5 shadow-lg relative">
+    <div className="h-screen bg-neutral-900 text-white border-r border-neutral-800 p-5 shadow-lg relative">
       <div className="flex gap-2 items-center">
-        <Image src={"/logo.png"} width={55} height={55} alt="logo" />
-        <h2 className="font-extrabold text-2xl text-indigo-600">NexLearn</h2>
+        <Image src={"/logonexbgrm.png"} width={55} height={55} alt="logo" />
+        <h2 className="font-extrabold text-2xl text-white">NexLearn</h2>
       </div>
 
       <div className="mt-8 space-y-4">
         {totalCourse < 10 ? (
           <Link href={`/create`} className="w-full">
-            <Button className="w-full gap-2 bg-indigo-600 hover:bg-indigo-700 text-white shadow-md">
+            <Button className="w-full gap-2 bg-white text-black hover:bg-neutral-300 shadow-md">
               <Plus /> Create New
             </Button>
           </Link>
         ) : (
-          <Button disabled className="w-full gap-2">
+          <Button disabled className="w-full gap-2 bg-neutral-700 text-neutral-400">
             <Plus /> Create New
           </Button>
         )}
@@ -48,8 +48,8 @@ const Sidebar = () => {
                 className={`flex gap-3 items-center p-3 rounded-xl cursor-pointer transition-all 
                   ${
                     path === menu.path
-                      ? "bg-indigo-100 text-indigo-700 font-semibold"
-                      : "hover:bg-slate-100 text-slate-700"
+                      ? "bg-neutral-700 text-white font-semibold"
+                      : "hover:bg-neutral-800 text-neutral-300"
                   }`}
               >
                 <menu.icon className="w-5 h-5" />
@@ -60,15 +60,15 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-6 left-5 right-5 p-5 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-xl shadow-sm">
-        <h2 className="text-lg font-semibold text-indigo-700">
+      <div className="absolute bottom-6 left-5 right-5 p-5 bg-neutral-800 rounded-xl shadow-sm">
+        <h2 className="text-lg font-semibold text-white">
           Available Credits: {10 - totalCourse}
         </h2>
         <Progress value={progressValue} className="mt-2" />
-        <h2 className="text-sm text-indigo-600 mt-1">
+        <h2 className="text-sm text-neutral-400 mt-1">
           {totalCourse} out of 10 Credits Used
         </h2>
-        <Link href={"/dashboard/upgrade"} className="text-xs mt-3 block text-indigo-700 font-medium">
+        <Link href={"/dashboard/upgrade"} className="text-xs mt-3 block text-white font-medium hover:underline">
           Upgrade to create more →
         </Link>
       </div>

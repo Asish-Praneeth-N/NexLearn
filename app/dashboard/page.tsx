@@ -4,7 +4,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="">
+    <div className="min-h-screen bg-black p-6 space-y-6 text-white">
       <Welcome />
       <CourseCard />
     </div>

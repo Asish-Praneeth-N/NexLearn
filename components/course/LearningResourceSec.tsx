@@ -34,12 +34,12 @@ const LearningResourceSec = ({ courseId, course }: LearningResourceSecProps) => 
       icon: "/quiz.png",
       path: "/quiz",
       type: "quiz",
-    }
+    },
   ];
 
   useEffect(() => {
     GetLearningList();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courseId]);
 
   const GetLearningList = async () => {
@@ -56,16 +56,18 @@ const LearningResourceSec = ({ courseId, course }: LearningResourceSecProps) => 
 
   return (
     <div className="mt-5">
-      <h2 className="font-medium text-xl">Learning Resources</h2>
+      <h2 className="font-medium text-xl text-white">Learning Resources</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-3">
         {LearningList.map((item, index) => (
           <Link key={index} href={`/course/${courseId}${item.path}`} passHref>
-            <LearningCardItem
-              item={item}
-              studyTypeContent={studyTypeContent}
-              course={course}
-              refreshData={GetLearningList}
-            />
+            <div className="w-full">
+              <LearningCardItem
+                item={item}
+                studyTypeContent={studyTypeContent}
+                course={course}
+                refreshData={GetLearningList}
+              />
+            </div>
           </Link>
         ))}
       </div>
