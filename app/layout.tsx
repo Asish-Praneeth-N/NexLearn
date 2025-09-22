@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Provider from "@/components/providers/provider";
 import { Toaster } from "@/components/ui/sonner";
 
-const outfit = Outfit({ subsets: ["latin"] });
+const jetBrainsMono = JetBrains_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "NexLearn - AI powered learning platform",
@@ -28,7 +28,7 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <body className={outfit.className}>
+        <body className={jetBrainsMono.className}>
           <Provider>
             {children}
           </Provider>

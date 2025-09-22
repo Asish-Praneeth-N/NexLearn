@@ -15,17 +15,17 @@ export default function NexLearnLanding() {
 
   const features = [
     {
-      icon: <Brain className="w-8 h-8 text-purple-600" />,
+      icon: <Brain className="w-8 h-8 text-white" />,
       title: "AI-Powered Content",
       description: "Generate personalized learning materials instantly with our advanced AI technology."
     },
     {
-      icon: <BookOpen className="w-8 h-8 text-purple-600" />,
+      icon: <BookOpen className="w-8 h-8 text-white" />,
       title: "Interactive Flashcards",
       description: "Master any subject with smart flashcards that adapt to your learning pace."
     },
     {
-      icon: <Zap className="w-8 h-8 text-purple-600" />,
+      icon: <Zap className="w-8 h-8 text-white" />,
       title: "Dynamic Quizzes",
       description: "Challenge yourself with AI-generated quizzes tailored to your skill level."
     }
@@ -60,30 +60,30 @@ export default function NexLearnLanding() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-black text-white font-inter">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
+      <nav className="fixed top-0 w-full bg-black backdrop-blur-md z-50 border-b border-neutral-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-neutral-900 rounded-lg flex items-center justify-center">
                 <Image
-                    src={'/logo.png'}
-                    alt='logo'
-                    width={40}
-                    height={40}
+                  src={'/logo.png'}
+                  alt='logo'
+                  width={40}
+                  height={40}
                 />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-black bg-clip-text text-transparent">
+              <span className="text-2xl font-serif font-bold text-white">
                 NexLearn
               </span>
             </div>
-            
+
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-gray-700 hover:text-purple-600 transition-colors">Features</a>
-              <a href="#testimonials" className="text-gray-700 hover:text-purple-600 transition-colors">Reviews</a>
+              <a href="#features" className="text-neutral-300 hover:text-white transition-colors">Features</a>
+              <a href="#testimonials" className="text-neutral-300 hover:text-white transition-colors">Reviews</a>
               <Link href={'/dashboard'}>
-                <button className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-6 py-2 rounded-full hover:from-purple-700 hover:to-purple-800 transition-all duration-300 shadow-lg hover:shadow-xl">
+                <button className="bg-white text-black px-6 py-2 rounded-full hover:bg-neutral-200 transition-all duration-300 shadow-sm">
                   Get Started
                 </button>
               </Link>
@@ -93,19 +93,19 @@ export default function NexLearnLanding() {
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
             </button>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100">
+          <div className="md:hidden bg-black border-t border-neutral-800">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <a href="#features" className="block px-3 py-2 text-gray-700 hover:text-purple-600">Features</a>
-              <a href="#testimonials" className="block px-3 py-2 text-gray-700 hover:text-purple-600">Reviews</a>
+              <a href="#features" className="block px-3 py-2 text-neutral-300 hover:text-white">Features</a>
+              <a href="#testimonials" className="block px-3 py-2 text-neutral-300 hover:text-white">Reviews</a>
               <Link href={'/dashboard'}>
-                <button className="w-full text-left bg-gradient-to-r from-purple-600 to-purple-700 text-white px-3 py-2 rounded-lg mt-2">
+                <button className="w-full text-left bg-white text-black px-3 py-2 rounded-lg mt-2">
                   Get Started
                 </button>
               </Link>
@@ -120,34 +120,34 @@ export default function NexLearnLanding() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className={`space-y-8 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
               <div className="space-y-6">
-                <div className="inline-flex items-center space-x-2 bg-purple-50 text-purple-700 px-4 py-2 rounded-full text-sm font-medium">
+                <div className="inline-flex items-center space-x-2 bg-neutral-900 text-neutral-200 px-4 py-2 rounded-full text-sm font-medium">
                   <Sparkles className="w-4 h-4" />
                   <span>AI-Powered Learning Platform</span>
                 </div>
                 
-                <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                  <span className="bg-gradient-to-r from-black via-purple-800 to-purple-600 bg-clip-text text-transparent">
+                <h1 className="text-5xl lg:text-6xl font-serif font-bold leading-tight">
+                  <span className="text-white">
                     Master Any Subject
                   </span>
                   <br />
-                  <span className="text-black">with AI-Driven Learning</span>
+                  <span className="text-neutral-400">with AI-Driven Learning</span>
                 </h1>
                 
-                <p className="text-xl text-gray-600 leading-relaxed max-w-2xl">
+                <p className="text-xl text-neutral-400 leading-relaxed max-w-2xl">
                   Transform your learning experience with personalized quizzes, intelligent flashcards, and AI-generated content that adapts to your unique learning style and pace.
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href={'/dashboard'}>
-                  <button className="group bg-gradient-to-r from-purple-600 to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-700 hover:to-purple-800 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center justify-center space-x-2">
+                  <button className="group bg-white text-black px-8 py-4 rounded-full text-lg font-semibold hover:bg-neutral-200 transition-all duration-300 shadow flex items-center justify-center space-x-2">
                     <span>Start Learning Free</span>
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </Link>
                 
                 <Link href={'/dashboard'}>
-                  <button className="group border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-full text-lg font-semibold hover:border-purple-600 hover:text-purple-600 transition-all duration-300 flex items-center justify-center space-x-2">
+                  <button className="group border-2 border-neutral-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:border-white transition-all duration-300 flex items-center justify-center space-x-2">
                     <Play className="w-5 h-5" />
                     <span>Watch Demo</span>
                   </button>
@@ -156,15 +156,14 @@ export default function NexLearnLanding() {
             </div>
 
             <div className={`relative ${isVisible ? 'animate-slide-in' : 'opacity-0'}`}>
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-purple-600 rounded-3xl blur-3xl opacity-20 animate-pulse"></div>
-              <div className="relative bg-gradient-to-br from-gray-50 to-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+              <div className="relative bg-neutral-900 rounded-3xl shadow-xl overflow-hidden border border-neutral-800">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
-                  src="/hello.jpg" 
+                  src="/brain.jpg" 
                   alt="NexLearn Learning Platform" 
                   className="w-full h-auto object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
               </div>
             </div>
           </div>
@@ -172,25 +171,25 @@ export default function NexLearnLanding() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-gray-50">
+      <section id="features" className="py-20 bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-black mb-4">
+            <h2 className="text-4xl font-serif font-bold text-white mb-4">
               Revolutionize Your Learning Experience
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-neutral-400 max-w-3xl mx-auto">
               Discover how our AI-powered platform adapts to your learning style and accelerates your educational journey.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {features.map((feature, index) => (
-              <div key={index} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                <div className="mb-6 p-3 bg-purple-50 rounded-xl w-fit">
+              <div key={index} className="bg-neutral-900 p-8 rounded-2xl shadow border border-neutral-800 hover:border-white transition-all duration-300">
+                <div className="mb-6 p-3 bg-black rounded-xl w-fit border border-neutral-700">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-black mb-4">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
+                <p className="text-neutral-400 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -198,10 +197,10 @@ export default function NexLearnLanding() {
           <div className="grid md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center p-6">
-                <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-black bg-clip-text text-transparent mb-2">
+                <div className="text-4xl font-bold text-white mb-2">
                   {stat.number}
                 </div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+                <div className="text-neutral-400 font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -209,33 +208,33 @@ export default function NexLearnLanding() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 bg-white">
+      <section id="testimonials" className="py-20 bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-black mb-4">
+            <h2 className="text-4xl font-serif font-bold text-white mb-4">
               Loved by Learners Worldwide
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-neutral-400">
               See what our community has to say about their learning transformation
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
+              <div key={index} className="bg-neutral-900 p-8 rounded-2xl shadow border border-neutral-800 hover:border-white transition-all duration-300">
                 <div className="flex items-center space-x-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    <Star key={i} className="w-5 h-5 fill-white text-white" />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-6 leading-relaxed">&quot;{testimonial.content}&quot;</p>
+                <p className="text-neutral-200 mb-6 leading-relaxed">“{testimonial.content}”</p>
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  <div className="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center font-bold text-lg">
                     {testimonial.name.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div>
-                    <div className="font-semibold text-black">{testimonial.name}</div>
-                    <div className="text-sm text-gray-600">{testimonial.role}</div>
+                    <div className="font-semibold text-white">{testimonial.name}</div>
+                    <div className="text-sm text-neutral-400">{testimonial.role}</div>
                   </div>
                 </div>
               </div>
@@ -245,26 +244,26 @@ export default function NexLearnLanding() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-12">
+      <footer className="bg-black text-white py-12 border-t border-neutral-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-purple-800 rounded-lg flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-white" />
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-black" />
                 </div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-white bg-clip-text text-transparent">
+                <span className="text-2xl font-serif font-bold text-white">
                   NexLearn
                 </span>
               </div>
-              <p className="text-gray-400">
+              <p className="text-neutral-400">
                 Empowering learners with AI-driven educational tools for a smarter future.
               </p>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4 text-purple-400">Product</h4>
-              <ul className="space-y-2 text-gray-400">
+              <h4 className="font-semibold mb-4 text-white">Product</h4>
+              <ul className="space-y-2 text-neutral-400">
                 <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">AI Content</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Flashcards</a></li>
@@ -272,8 +271,8 @@ export default function NexLearnLanding() {
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4 text-purple-400">Company</h4>
-              <ul className="space-y-2 text-gray-400">
+              <h4 className="font-semibold mb-4 text-white">Company</h4>
+              <ul className="space-y-2 text-neutral-400">
                 <li><a href="#" className="hover:text-white transition-colors">About</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
@@ -282,8 +281,8 @@ export default function NexLearnLanding() {
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4 text-purple-400">Support</h4>
-              <ul className="space-y-2 text-gray-400">
+              <h4 className="font-semibold mb-4 text-white">Support</h4>
+              <ul className="space-y-2 text-neutral-400">
                 <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
@@ -292,13 +291,18 @@ export default function NexLearnLanding() {
             </div>
           </div>
           
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+          <div className="border-t border-neutral-800 mt-12 pt-8 text-center text-neutral-400">
             <p>&copy; 2025 NexLearn. All rights reserved. Built with AI-powered innovation.</p>
           </div>
         </div>
       </footer>
 
       <style jsx>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Merriweather:wght@700&display=swap');
+
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Merriweather', serif; }
+
         @keyframes fade-in {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
