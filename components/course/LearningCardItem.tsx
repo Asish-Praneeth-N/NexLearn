@@ -50,9 +50,8 @@ const LearningCardItem = ({
 
   return (
     <div
-      className={`flex flex-col items-center p-5 rounded-lg shadow-md h-full transition-colors ${
-        !isContentAvailable ? "grayscale" : ""
-      } bg-neutral-900 border border-neutral-800 hover:bg-neutral-800`}
+      className={`flex flex-col items-center p-5 rounded-lg shadow-md h-full transition-colors
+        ${!isContentAvailable ? "grayscale" : ""} bg-neutral-900 border border-neutral-800 hover:bg-neutral-800`}
     >
       {/* Availability Badge */}
       <h2
