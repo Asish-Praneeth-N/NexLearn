@@ -51,12 +51,12 @@ const LearningCardItem = ({
   return (
     <div
       className={`flex flex-col items-center p-5 rounded-lg shadow-md h-full transition-colors
-        ${!isContentAvailable ? "grayscale" : ""} bg-neutral-900 border border-neutral-800 hover:bg-neutral-800`}
+        ${!isContentAvailable ? "grayscale" : ""} bg-neutral-900 border border-neutral-700`}
     >
       {/* Availability Badge */}
       <h2
         className={`p-1 px-2 rounded-full text-[10px] mb-2 ${
-          isContentAvailable ? "bg-green-600 text-white" : "bg-neutral-700 text-white"
+          isContentAvailable ? "bg-green-600 text-white" : "bg-gray-600 text-white"
         }`}
       >
         {isContentAvailable ? "Available" : "Unavailable"}
@@ -69,7 +69,7 @@ const LearningCardItem = ({
       <h2 className="font-medium mt-3 text-white">{item.name}</h2>
 
       {/* Description */}
-      <p className="text-neutral-400 mb-4 text-center text-sm flex-grow">{item.desc}</p>
+      <p className="text-gray-300 mb-4 text-center text-sm flex-grow">{item.desc}</p>
 
       {/* Action Button */}
       <div className="mt-auto w-full">
@@ -80,16 +80,16 @@ const LearningCardItem = ({
               GenerateContent();
             }}
             variant="outline"
-            className="w-full text-white border-white hover:bg-white hover:text-black"
+            className="w-full text-white border-white bg-neutral-800"
             disabled={loading}
           >
             {loading && <RefreshCcw className="animate-spin mr-2 h-4 w-4" />}
-            Generate
+            {!loading && "Generate"}
           </Button>
         ) : (
           <Button
             variant="outline"
-            className="w-full text-white border-white hover:bg-white hover:text-black"
+            className="w-full text-white border-white bg-neutral-800"
           >
             View
           </Button>
