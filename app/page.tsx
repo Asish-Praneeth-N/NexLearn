@@ -68,13 +68,14 @@ export default function NexLearnLanding() {
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-neutral-900 rounded-lg flex items-center justify-center">
                 <Image
-                  src={'/logo.png'}
+                  src={'/logonex.png'}
                   alt='logo'
                   width={40}
                   height={40}
                 />
               </div>
-              <span className="text-2xl font-serif font-bold text-white">
+              {/* Gradient Text */}
+              <span className="text-2xl font-serif font-bold bg-gradient-to-r from-white to-neutral-700 bg-clip-text text-transparent">
                 NexLearn
               </span>
             </div>
@@ -224,7 +225,7 @@ export default function NexLearnLanding() {
               <div key={index} className="bg-neutral-900 p-8 rounded-2xl shadow border border-neutral-800 hover:border-white transition-all duration-300">
                 <div className="flex items-center space-x-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-white text-white" />
+                    <Star key={i} className="w-5 h-5 fill-yellow-500 text-white" />
                   ))}
                 </div>
                 <p className="text-neutral-200 mb-6 leading-relaxed">“{testimonial.content}”</p>
