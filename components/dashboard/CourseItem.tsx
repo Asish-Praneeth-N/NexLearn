@@ -1,11 +1,13 @@
+
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { RefreshCcw } from "lucide-react";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import Spinner from "@/app/loaderspinner";// Import the Spinner component
 
 interface CourseItemProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,6 +15,17 @@ interface CourseItemProps {
 }
 
 const CourseItem = ({ course }: CourseItemProps) => {
+  const [isNavigating, setIsNavigating] = useState(false); // State to track navigation
+  const router = useRouter();
+
+  const handleViewClick = () => {
+    setIsNavigating(true); // Show spinner when button is clicked
+    // Delay navigation by 4 seconds
+    setTimeout(() => {
+      router.push(`/course/${course?.courseId}`); // Navigate to the course page
+    }, 3000); // 4000ms = 4 seconds
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -45,16 +58,21 @@ const CourseItem = ({ course }: CourseItemProps) => {
       {/* Footer */}
       <div className="flex justify-end mt-6">
         {course?.status === "Generating" ? (
-          <span className="text-sm px-3 py-1 rounded-full bg-neutral-700 text-white flex gap-2 items-center">
-            <RefreshCcw className="animate-spin w-4 h-4" />
+          <div className="flex items-center justify-center text-sm px-3 py-1 rounded-full bg-neutral-700 text-white gap-2">
+            <Spinner /> {/* Use the updated Spinner */}
             Generating...
-          </span>
+          </div>
+        ) : isNavigating ? (
+          <div className="flex items-center justify-center">
+            <Spinner /> {/* Show the spinner during navigation */}
+          </div>
         ) : (
-          <Link href={`/course/${course?.courseId}`}>
-            <Button className="bg-white text-black hover:bg-neutral-200 shadow-md">
-              View
-            </Button>
-          </Link>
+          <Button
+            className="bg-white text-black hover:bg-neutral-200 shadow-md"
+            onClick={handleViewClick}
+          >
+            View
+          </Button>
         )}
       </div>
     </motion.div>

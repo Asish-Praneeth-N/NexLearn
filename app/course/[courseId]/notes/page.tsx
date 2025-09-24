@@ -95,18 +95,18 @@ const Notes = () => {
     
     return cleanedContent
       .replace(/<pre>\s*<code>([\s\S]*?)<\/code>\s*<\/pre>/g, 
-        '<div class="code-block bg-gray-900 text-white p-4 rounded-lg my-4 overflow-x-auto"><pre><code>$1</code></pre></div>')
+        '<div class="code-block bg-black text-white p-6 rounded-lg my-6 overflow-x-auto border border-gray-800"><pre><code>$1</code></pre></div>')
       .replace(/<code(?![^>]*class)(.*?)>(.*?)<\/code>/g, 
-        '<code class="inline-code bg-gray-100 text-red-600 px-2 py-1 rounded text-sm font-mono">$2</code>')
-      .replace(/<h1([^>]*)>/g, '<h1 class="text-3xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-blue-500"$1>')
-      .replace(/<h2([^>]*)>/g, '<h2 class="text-2xl font-semibold text-gray-800 mt-8 mb-4"$1>')
-      .replace(/<h3([^>]*)>/g, '<h3 class="text-xl font-medium text-gray-700 mt-6 mb-3"$1>')
-      .replace(/<p([^>]*)>/g, '<p class="text-gray-700 leading-relaxed mb-4"$1>')
-      .replace(/<strong([^>]*)>/g, '<strong class="font-semibold text-gray-900"$1>')
-      .replace(/<em([^>]*)>/g, '<em class="italic text-blue-700"$1>')
-      .replace(/<ul([^>]*)>/g, '<ul class="list-disc pl-6 mb-4 space-y-2"$1>')
-      .replace(/<ol([^>]*)>/g, '<ol class="list-decimal pl-6 mb-4 space-y-2"$1>')
-      .replace(/<li([^>]*)>/g, '<li class="text-gray-700"$1>');
+        '<code class="inline-code bg-gray-900 text-gray-100 px-3 py-1 rounded text-sm font-mono border border-gray-700">$2</code>')
+      .replace(/<h1([^>]*)>/g, '<h1 class="text-4xl font-bold text-white mb-8 pb-4 border-b-2 border-white"$1>')
+      .replace(/<h2([^>]*)>/g, '<h2 class="text-3xl font-semibold text-white mt-10 mb-6"$1>')
+      .replace(/<h3([^>]*)>/g, '<h3 class="text-2xl font-medium text-gray-200 mt-8 mb-4"$1>')
+      .replace(/<p([^>]*)>/g, '<p class="text-gray-300 leading-relaxed mb-6 text-lg"$1>')
+      .replace(/<strong([^>]*)>/g, '<strong class="font-semibold text-white"$1>')
+      .replace(/<em([^>]*)>/g, '<em class="italic text-gray-200"$1>')
+      .replace(/<ul([^>]*)>/g, '<ul class="list-disc pl-8 mb-6 space-y-3"$1>')
+      .replace(/<ol([^>]*)>/g, '<ol class="list-decimal pl-8 mb-6 space-y-3"$1>')
+      .replace(/<li([^>]*)>/g, '<li class="text-gray-300 text-lg"$1>');
   };
 
   const downloadStyledPDF = async () => {
@@ -133,11 +133,11 @@ const Notes = () => {
       // Create the styled content
       tempContainer.innerHTML = `
         <div style="padding: 40px; max-width: 800px; margin: 0 auto; background: white;">
-          <div style="text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px solid #3B82F6;">
-            <h1 style="font-size: 28px; font-weight: bold; color: #1F2937; margin: 0; line-height: 1.2;">
+          <div style="text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px solid #000000;">
+            <h1 style="font-size: 28px; font-weight: bold; color: #000000; margin: 0; line-height: 1.2;">
               ${title}
             </h1>
-            <p style="color: #6B7280; margin-top: 8px; font-size: 14px;">
+            <p style="color: #666666; margin-top: 8px; font-size: 14px;">
               Chapter ${selectedChapter + 1} of ${notes.length}
             </p>
           </div>
@@ -155,52 +155,52 @@ const Notes = () => {
         .pdf-content h1 {
           font-size: 24px !important;
           font-weight: bold !important;
-          color: #1F2937 !important;
+          color: #000000 !important;
           margin: 30px 0 20px 0 !important;
           padding-bottom: 10px !important;
-          border-bottom: 2px solid #3B82F6 !important;
+          border-bottom: 2px solid #000000 !important;
           page-break-after: avoid !important;
         }
         .pdf-content h2 {
           font-size: 20px !important;
           font-weight: 600 !important;
-          color: #374151 !important;
+          color: #000000 !important;
           margin: 25px 0 15px 0 !important;
           page-break-after: avoid !important;
         }
         .pdf-content h3 {
           font-size: 18px !important;
           font-weight: 500 !important;
-          color: #4B5563 !important;
+          color: #333333 !important;
           margin: 20px 0 12px 0 !important;
           page-break-after: avoid !important;
         }
         .pdf-content p {
-          color: #374151 !important;
+          color: #333333 !important;
           line-height: 1.7 !important;
           margin-bottom: 16px !important;
           text-align: justify !important;
         }
         .pdf-content strong {
           font-weight: 600 !important;
-          color: #1F2937 !important;
+          color: #000000 !important;
         }
         .pdf-content em {
           font-style: italic !important;
-          color: #2563EB !important;
+          color: #666666 !important;
         }
         .pdf-content ul, .pdf-content ol {
           margin: 16px 0 16px 24px !important;
           padding: 0 !important;
         }
         .pdf-content li {
-          color: #374151 !important;
+          color: #333333 !important;
           margin-bottom: 8px !important;
           line-height: 1.6 !important;
         }
         .pdf-content .code-block {
-          background: black !important;
-          border: 1px solid #D1D5DB !important;
+          background: #f5f5f5 !important;
+          border: 1px solid #cccccc !important;
           border-radius: 6px !important;
           padding: 16px !important;
           margin: 20px 0 !important;
@@ -211,12 +211,13 @@ const Notes = () => {
           page-break-inside: avoid !important;
         }
         .pdf-content .inline-code {
-          background: black !important;
-          color: white !important;
+          background: #f5f5f5 !important;
+          color: #000000 !important;
           padding: 2px 6px !important;
           border-radius: 4px !important;
           font-family: 'Courier New', monospace !important;
           font-size: 13px !important;
+          border: 1px solid #cccccc !important;
         }
         .pdf-content pre {
           margin: 0 !important;
@@ -306,17 +307,17 @@ const Notes = () => {
   };
 
   return (
-    <div className="flex lg:flex-row flex-col min-h-screen bg-gray-50">
+    <div className="flex lg:flex-row flex-col min-h-screen bg-black">
       {/* Sidebar */}
-      <div className="w-96 bg-white border-r border-gray-200 shadow-sm overflow-hidden">
-        <div className="p-6 border-b border-gray-200">
-          <div className="flex items-center gap-2">
-            <BookOpen className="h-6 w-6 text-blue-600" />
-            <h2 className="text-xl font-semibold text-gray-900">Course Chapters</h2>
+      <div className="w-96 bg-gray-900 border-r border-gray-800 shadow-2xl overflow-hidden">
+        <div className="p-6 border-b border-gray-800 bg-black">
+          <div className="flex items-center gap-3">
+            <BookOpen className="h-6 w-6 text-white" />
+            <h2 className="text-xl font-semibold text-white">Course Chapters</h2>
           </div>
         </div>
         <ScrollArea className="h-[calc(100vh-80px)] pb-20">
-          <div className="p-6 space-y-3">
+          <div className="p-6 space-y-4">
             {notes.map((note, index) => {
               const titleMatch = note.notes.match(/<h1[^>]*>(.*?)<\/h1>/);
               const title = titleMatch ? 
@@ -326,23 +327,23 @@ const Notes = () => {
               return (
                 <Card
                   key={index}
-                  className={`cursor-pointer transition-all duration-200 hover:shadow-md ${
+                  className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-white/10 border ${
                     selectedChapter === index 
-                      ? 'bg-blue-50 border-blue-200 shadow-sm' 
-                      : 'hover:bg-gray-50'
+                      ? 'bg-white border-white shadow-lg shadow-white/20' 
+                      : 'bg-gray-800 border-gray-700 hover:bg-gray-750 hover:border-gray-600'
                   }`}
                   onClick={() => setSelectedChapter(index)}
                 >
-                  <CardHeader className="pb-2">
-                    <CardTitle className={`text-sm font-medium ${
-                      selectedChapter === index ? 'text-blue-700' : 'text-gray-700'
+                  <CardHeader className="pb-3">
+                    <CardTitle className={`text-sm font-medium transition-colors ${
+                      selectedChapter === index ? 'text-black' : 'text-white'
                     }`}>
                       {title}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <div className={`text-xs ${
-                      selectedChapter === index ? 'text-blue-600' : 'text-gray-500'
+                    <div className={`text-xs transition-colors ${
+                      selectedChapter === index ? 'text-gray-600' : 'text-gray-400'
                     }`}>
                       Chapter {index + 1} of {notes.length}
                     </div>
@@ -355,15 +356,15 @@ const Notes = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-12 py-2">
-          <div className="flex justify-end mb-2">
+      <div className="flex-1 overflow-hidden bg-black">
+        <div className="max-w-6xl mx-auto px-12 py-4">
+          <div className="flex justify-end mb-4">
             <Button
               onClick={downloadStyledPDF}
-              className={`${
+              className={`transition-all duration-200 ${
                 isPdfGenerating 
-                  ? 'bg-gray-400 cursor-not-allowed' 
-                  : 'bg-blue-600 hover:bg-blue-700'
+                  ? 'bg-gray-600 cursor-not-allowed' 
+                  : 'bg-white hover:bg-gray-200 text-black hover:shadow-lg hover:shadow-white/20'
               }`}
               size="sm"
               disabled={notes.length === 0 || isPdfGenerating}
@@ -374,10 +375,10 @@ const Notes = () => {
           </div>
           <ScrollArea className="h-screen">
             {notes.length > 0 && (
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+              <div className="bg-black rounded-xl shadow-2xl border border-gray-800">
                 <div className="p-12">
                   <div 
-                    className="prose prose-lg max-w-none"
+                    className="prose prose-lg max-w-none prose-invert"
                     dangerouslySetInnerHTML={{ 
                       __html: formatContent(notes[selectedChapter]?.notes || '') 
                     }} 
@@ -386,9 +387,9 @@ const Notes = () => {
               </div>
             )}
             {notes.length === 0 && (
-              <div className="text-center py-12">
-                <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-500 text-lg">Loading course content...</p>
+              <div className="text-center py-16">
+                <BookOpen className="h-20 w-20 text-gray-600 mx-auto mb-6" />
+                <p className="text-gray-400 text-xl">Loading course content...</p>
               </div>
             )}
           </ScrollArea>
@@ -400,16 +401,16 @@ const Notes = () => {
         {!isChatOpen ? (
           <Button
             onClick={() => setIsChatOpen(true)}
-            className="h-14 w-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg"
+            className="h-16 w-16 rounded-full bg-white hover:bg-gray-200 text-black shadow-2xl hover:shadow-white/20 transition-all duration-300 hover:scale-110"
             size="lg"
           >
-            <MessageCircle className="h-6 w-6" />
+            <MessageCircle className="h-7 w-7" />
           </Button>
         ) : (
-          <Card className="w-96 h-96 shadow-xl border-0">
-            <CardHeader className="bg-blue-600 text-white rounded-t-lg">
+          <Card className="w-96 h-96 shadow-2xl border-gray-700 bg-gray-900">
+            <CardHeader className="bg-black text-white rounded-t-lg border-b border-gray-700">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <Bot className="h-5 w-5" />
                   <CardTitle className="text-sm">AI Study Assistant</CardTitle>
                 </div>
@@ -417,45 +418,45 @@ const Notes = () => {
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsChatOpen(false)}
-                  className="text-white hover:bg-blue-700 h-8 w-8 p-0"
+                  className="text-white hover:bg-gray-800 h-8 w-8 p-0 transition-all duration-200"
                 >
                   <X className="h-4 w-4" />
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="p-0 flex flex-col h-80">
+            <CardContent className="p-0 flex flex-col h-80 bg-gray-900">
               <ScrollArea className="flex-1 p-4">
                 <div className="space-y-4">
                   {chatMessages.length === 0 && (
-                    <div className="text-center text-gray-500 py-8">
-                      <Bot className="h-8 w-8 mx-auto mb-2 text-blue-500" />
+                    <div className="text-center text-gray-400 py-8">
+                      <Bot className="h-10 w-10 mx-auto mb-3 text-white" />
                       <p className="text-sm">Ask me anything about this chapter!</p>
                     </div>
                   )}
                   {chatMessages.map((message) => (
                     <div
                       key={message.id}
-                      className={`flex gap-2 ${
+                      className={`flex gap-3 ${
                         message.role === 'user' ? 'justify-end' : 'justify-start'
                       }`}
                     >
-                      <div className={`flex gap-2 max-w-xs ${
+                      <div className={`flex gap-3 max-w-xs ${
                         message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
                       }`}>
-                        <div className={`h-8 w-8 rounded-full flex items-center justify-center ${
+                        <div className={`h-8 w-8 rounded-full flex items-center justify-center transition-all duration-200 ${
                           message.role === 'user' 
-                            ? 'bg-blue-500 text-white' 
-                            : 'bg-gray-200 text-gray-600'
+                            ? 'bg-white text-black' 
+                            : 'bg-gray-800 text-white border border-gray-700'
                         }`}>
                           {message.role === 'user' ? 
                             <User className="h-4 w-4" /> : 
                             <Bot className="h-4 w-4" />
                           }
                         </div>
-                        <div className={`p-3 rounded-lg text-sm ${
+                        <div className={`p-3 rounded-lg text-sm transition-all duration-200 ${
                           message.role === 'user'
-                            ? 'bg-blue-500 text-white'
-                            : 'bg-gray-100 text-gray-800'
+                            ? 'bg-white text-black shadow-lg'
+                            : 'bg-gray-800 text-white border border-gray-700'
                         }`}>
                           {message.content}
                         </div>
@@ -463,37 +464,37 @@ const Notes = () => {
                     </div>
                   ))}
                   {isLoading && (
-                    <div className="flex gap-2 justify-start">
-                      <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
-                        <Bot className="h-4 w-4 text-gray-600" />
+                    <div className="flex gap-3 justify-start">
+                      <div className="h-8 w-8 rounded-full bg-gray-800 flex items-center justify-center border border-gray-700">
+                        <Bot className="h-4 w-4 text-white" />
                       </div>
-                      <div className="bg-gray-100 p-3 rounded-lg text-sm">
+                      <div className="bg-gray-800 p-3 rounded-lg text-sm border border-gray-700">
                         <div className="flex gap-1">
-                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                          <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
+                          <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                          <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                         </div>
                       </div>
                     </div>
                   )}
                 </div>
               </ScrollArea>
-              <Separator />
-              <div className="p-4 mb-2">
+              <Separator className="bg-gray-700" />
+              <div className="p-4 mb-2 bg-gray-900">
                 <div className="flex gap-2">
                   <Input
                     placeholder="Ask about this chapter..."
                     value={chatInput}
                     onChange={(e) => setChatInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
-                    className="flex-1 border"
+                    className="flex-1 border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:border-white transition-all duration-200"
                     disabled={isLoading}
                   />
                   <Button 
                     onClick={sendChatMessage}
                     disabled={!chatInput.trim() || isLoading}
                     size="sm"
-                    className="bg-blue-600 hover:bg-blue-700"
+                    className="bg-white hover:bg-gray-200 text-black transition-all duration-200"
                   >
                     <Send className="h-4 w-4" />
                   </Button>
@@ -507,9 +508,13 @@ const Notes = () => {
       <style jsx global>{`
         .code-block {
           font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+          background: #000000 !important;
+          border: 1px solid #333333 !important;
         }
         .inline-code {
           font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+          background: #1a1a1a !important;
+          border: 1px solid #333333 !important;
         }
         .prose pre {
           background: transparent !important;
@@ -524,6 +529,36 @@ const Notes = () => {
         }
         .prose pre code {
           background: transparent !important;
+        }
+        .prose-invert {
+          color: #e5e5e5;
+        }
+        .prose-invert h1,
+        .prose-invert h2,
+        .prose-invert h3,
+        .prose-invert h4 {
+          color: white;
+        }
+        .prose-invert strong {
+          color: white;
+        }
+        .prose-invert blockquote {
+          border-left-color: white;
+          color: #d1d5db;
+        }
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+          width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+          background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: #404040;
+          border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: #555555;
         }
       `}</style>
     </div>

@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import axios from "axios";
 import { RefreshCcw } from "lucide-react";
 import { toast } from "sonner";
+import Spinner from "@/app/loaderspinner"; // Updated path
 
 interface LearningCardItemProps {
   item: any;
@@ -21,10 +22,17 @@ const LearningCardItem = ({
   refreshData,
 }: LearningCardItemProps) => {
   const [loading, setLoading] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
+
+  const triggerSpinner = () => {
+    setShowSpinner(true);
+    setTimeout(() => setShowSpinner(false), 3000); // Loader for 3 seconds
+  };
 
   const GenerateContent = async () => {
     toast("Generating content...");
     setLoading(true);
+    triggerSpinner();
 
     let chapters = "";
     course?.courseLayout.chapters.forEach((chapter: any) => {
@@ -51,7 +59,7 @@ const LearningCardItem = ({
   return (
     <div
       className={`flex flex-col items-center p-5 rounded-lg shadow-md h-full transition-colors
-        ${!isContentAvailable ? "grayscale" : ""} bg-neutral-900 border border-neutral-700`}
+        ${!isContentAvailable ? "grayscale" : ""} bg-neutral-900 border border-neutral-700 relative`}
     >
       {/* Availability Badge */}
       <h2
@@ -71,8 +79,15 @@ const LearningCardItem = ({
       {/* Description */}
       <p className="text-gray-300 mb-4 text-center text-sm flex-grow">{item.desc}</p>
 
+      {/* Loader Overlay */}
+      {showSpinner && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/60 rounded-lg z-50">
+          <Spinner />
+        </div>
+      )}
+
       {/* Action Button */}
-      <div className="mt-auto w-full">
+      <div className="mt-auto w-full relative">
         {!isContentAvailable ? (
           <Button
             onClick={(e) => {
@@ -88,6 +103,7 @@ const LearningCardItem = ({
           </Button>
         ) : (
           <Button
+            onClick={() => triggerSpinner()}
             variant="outline"
             className="w-full text-white border-white bg-neutral-800"
           >
