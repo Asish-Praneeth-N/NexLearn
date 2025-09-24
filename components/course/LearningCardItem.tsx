@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 import axios from "axios";
 import { RefreshCcw } from "lucide-react";
 import { toast } from "sonner";
-import Spinner from "@/app/loaderspinner"; // Updated path
+import Spinner from "@/app/loaderspinner"; // loader component
 import { useRouter } from "next/navigation";
 
 interface LearningCardItemProps {
@@ -27,14 +27,16 @@ const LearningCardItem = ({
   const [loading, setLoading] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
 
+  // Trigger spinner for 3 seconds and optionally call a callback
   const triggerSpinner = (callback?: () => void) => {
     setShowSpinner(true);
     setTimeout(() => {
       setShowSpinner(false);
       if (callback) callback();
-    }, 3000); // 3 seconds
+    }, 3000);
   };
 
+  // Generate content handler
   const GenerateContent = async () => {
     toast("Generating content...");
     setLoading(true);
@@ -45,28 +47,27 @@ const LearningCardItem = ({
       chapters = (chapter.chapter_title || chapter.chapterTitle) + ", " + chapters;
     });
 
-   try {
-  await axios.post("/api/generate-study-type", {
-    courseId: course?.courseId,
-    type: item.type,
-    chapters: chapters,
-  });
-  toast.success("Content generation started!");
-  setTimeout(refreshData, 3000);
-}catch {
-  toast.error("Generation failed");
-}
- finally {
-  setLoading(false);
-}
-
+    try {
+      await axios.post("/api/generate-study-type", {
+        courseId: course?.courseId,
+        type: item.type,
+        chapters,
+      });
+      toast.success("Content generation started!");
+      setTimeout(refreshData, 3000); // refresh after 3s
+    } catch {
+      toast.error("Generation failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const isContentAvailable = studyTypeContent?.[item.type]?.length > 0;
 
+  // View handler with spinner then navigation
   const handleView = () => {
     triggerSpinner(() => {
-      router.push(`/course/${course.courseId}/flashcards`); // Adjust path if needed
+      router.push(`/course/${course.courseId}/flashcards`);
     });
   };
 
