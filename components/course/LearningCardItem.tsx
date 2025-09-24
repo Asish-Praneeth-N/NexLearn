@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+
 import Image from "next/image";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
@@ -7,6 +8,7 @@ import axios from "axios";
 import { RefreshCcw } from "lucide-react";
 import { toast } from "sonner";
 import Spinner from "@/app/loaderspinner"; // Updated path
+import { useRouter } from "next/navigation";
 
 interface LearningCardItemProps {
   item: any;
@@ -21,12 +23,16 @@ const LearningCardItem = ({
   course,
   refreshData,
 }: LearningCardItemProps) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
 
-  const triggerSpinner = () => {
+  const triggerSpinner = (callback?: () => void) => {
     setShowSpinner(true);
-    setTimeout(() => setShowSpinner(false), 3000); // Loader for 3 seconds
+    setTimeout(() => {
+      setShowSpinner(false);
+      if (callback) callback();
+    }, 3000); // 3 seconds
   };
 
   const GenerateContent = async () => {
@@ -47,7 +53,7 @@ const LearningCardItem = ({
       });
       toast.success("Content generation started!");
       setTimeout(refreshData, 3000);
-    } catch (error) {
+    } catch {
       toast.error("Generation failed");
     } finally {
       setLoading(false);
@@ -55,6 +61,12 @@ const LearningCardItem = ({
   };
 
   const isContentAvailable = studyTypeContent?.[item.type]?.length > 0;
+
+  const handleView = () => {
+    triggerSpinner(() => {
+      router.push(`/course/${course.courseId}/flashcards`); // Adjust path if needed
+    });
+  };
 
   return (
     <div
@@ -103,7 +115,7 @@ const LearningCardItem = ({
           </Button>
         ) : (
           <Button
-            onClick={() => triggerSpinner()}
+            onClick={handleView}
             variant="outline"
             className="w-full text-white border-white bg-neutral-800"
           >

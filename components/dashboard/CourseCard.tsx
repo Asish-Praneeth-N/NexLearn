@@ -11,16 +11,12 @@ import Link from "next/link";
 
 const CourseCard = () => {
   const { user } = useUser();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [courseCard, setCourseCard] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  const { totalCourse, setTotalCourse } = useContext(CourseCountContext);
+  const { totalCourse, setTotalCourse } = useContext(CourseCountContext) as any;
 
   useEffect(() => {
-    user && GetCourseCard();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (user) GetCourseCard();
   }, [user]);
 
   const GetCourseCard = async () => {
@@ -31,8 +27,8 @@ const CourseCard = () => {
       });
       setCourseCard(result.data.result);
       setTotalCourse(result.data.result?.length);
-    } catch (error) {
-      console.error("Error fetching courses:", error);
+    } catch (err) {
+      console.error("Error fetching courses:", err);
     } finally {
       setLoading(false);
     }
@@ -100,4 +96,3 @@ const CourseCard = () => {
 };
 
 export default CourseCard;
-  
