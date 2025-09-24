@@ -1,7 +1,12 @@
-import React from "react";
-import { Check } from "lucide-react";
+"use client";
+import React, { useState } from "react";
+import { Check, ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const UpgradePage = () => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const router = useRouter();
+
   const plans = [
     {
       name: "Starter",
@@ -35,8 +40,16 @@ const UpgradePage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black rounded-xl p-10 flex flex-col items-center justify-center">
-      <div className="text-center text-white mb-16">
+    <div className="min-h-screen bg-black rounded-xl p-6 md:p-10 flex flex-col items-center justify-center relative">
+      {/* Back Button - Mobile Only */}
+      <button
+        onClick={() => router.push("/dashboard")}
+        className="absolute top-4 left-4 p-2 rounded-full bg-white text-black shadow-md md:hidden"
+      >
+        <ArrowLeft className="w-5 h-5" />
+      </button>
+
+      <div className="text-center text-white mb-16 mt-10 md:mt-0">
         <h1 className="text-5xl font-extrabold mb-4 drop-shadow-lg">
           Upgrade Your Plan
         </h1>
@@ -46,40 +59,38 @@ const UpgradePage = () => {
         </p>
       </div>
 
+      {/* Pricing Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl w-full">
         {plans.map((plan, index) => (
           <div
             key={index}
-            className={`relative bg-white/95 rounded-2xl shadow-2xl p-8 flex flex-col items-center text-center transform transition-all hover:scale-105 hover:shadow-purple-500/40 duration-300 ${
-              plan.highlight ? "border-4 border-purple-500" : ""
+            className={`relative bg-black text-white border rounded-2xl shadow-lg p-8 flex flex-col items-center text-center transform transition-all hover:scale-105 hover:shadow-xl duration-300 ${
+              plan.highlight ? "border-2 border-white" : "border border-gray-600"
             }`}
           >
             {plan.highlight && (
-              <span className="absolute -top-4 px-4 py-1 bg-purple-600 text-white text-sm font-semibold rounded-full shadow-md">
+              <span className="absolute -top-4 px-4 py-1 bg-white text-black text-sm font-semibold rounded-full shadow-md border border-gray-400">
                 Most Popular
               </span>
             )}
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              {plan.name}
-            </h2>
-            <p className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-4">
-              {plan.price}
-            </p>
-            <p className="text-gray-600 mb-6">{plan.description}</p>
+            <h2 className="text-3xl font-bold mb-4">{plan.name}</h2>
+            <p className="text-4xl font-extrabold mb-4">{plan.price}</p>
+            <p className="text-gray-300 mb-6">{plan.description}</p>
 
-            <ul className="text-gray-700 text-left space-y-3 mb-8">
+            <ul className="text-gray-200 text-left space-y-3 mb-8">
               {plan.features.map((feature, i) => (
                 <li key={i} className="flex items-center gap-2">
-                  <Check className="text-green-500 w-5 h-5" /> {feature}
+                  <Check className="text-white w-5 h-5" /> {feature}
                 </li>
               ))}
             </ul>
 
             <button
-              className={`px-6 py-3 rounded-xl font-semibold text-white w-full shadow-md transition-all duration-300 ${
+              onClick={() => setIsDialogOpen(true)}
+              className={`px-6 py-3 rounded-xl font-semibold text-black w-full shadow-md transition-all duration-300 ${
                 plan.highlight
-                  ? "bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90"
-                  : "bg-gray-700 hover:bg-gray-900"
+                  ? "bg-white hover:bg-gray-200"
+                  : "bg-gray-200 hover:bg-gray-300"
               }`}
             >
               {plan.highlight ? "Upgrade Now" : "Choose Plan"}
@@ -87,6 +98,24 @@ const UpgradePage = () => {
           </div>
         ))}
       </div>
+
+      {/* Dialog Box */}
+      {isDialogOpen && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+          <div className="bg-white text-black rounded-xl shadow-2xl p-8 w-[90%] max-w-md text-center">
+            <h2 className="text-2xl font-bold mb-4">🚧 Coming Soon</h2>
+            <p className="mb-6 text-gray-700">
+              This feature is not yet available. Stay tuned for updates!
+            </p>
+            <button
+              onClick={() => setIsDialogOpen(false)}
+              className="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
