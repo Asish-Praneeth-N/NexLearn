@@ -9,7 +9,7 @@ import { Plus, RefreshCcw } from "lucide-react";
 import { CourseCountContext } from "../context/CourseCountContext";
 import Link from "next/link";
 
-// Define a proper Course type
+// Define Course type
 interface Chapter {
   chapter_title?: string;
   chapterTitle?: string;
@@ -24,7 +24,12 @@ interface Course {
   [key: string]: any;
 }
 
-// Define the API response type
+// API request payload type
+interface GetCoursesPayload {
+  createdBy?: string;
+}
+
+// API response type
 interface CoursesResponse {
   result: Course[];
 }
@@ -36,6 +41,8 @@ const CourseCard = () => {
 
   const courseContext = useContext(CourseCountContext);
 
+  const totalCourse = courseContext?.totalCourse ?? 0;
+
   useEffect(() => {
     if (user) {
       GetCourseCard();
@@ -46,10 +53,10 @@ const CourseCard = () => {
   const GetCourseCard = async () => {
     setLoading(true);
     try {
-      const result = await axios.post<CoursesResponse>("/api/courses", {
+      const payload: GetCoursesPayload = {
         createdBy: user?.primaryEmailAddress?.emailAddress,
-      });
-
+      };
+      const result = await axios.post<CoursesResponse>("/api/courses", payload);
       const courses = result.data.result ?? [];
       setCourseCard(courses);
 
@@ -62,8 +69,6 @@ const CourseCard = () => {
       setLoading(false);
     }
   };
-
-  const totalCourse = courseContext?.totalCourse ?? 0;
 
   return (
     <>
