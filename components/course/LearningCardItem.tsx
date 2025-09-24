@@ -53,9 +53,10 @@ const LearningCardItem = ({
   });
   toast.success("Content generation started!");
   setTimeout(refreshData, 3000);
-} catch (_error) {
+}catch {
   toast.error("Generation failed");
-} finally {
+}
+ finally {
   setLoading(false);
 }
 

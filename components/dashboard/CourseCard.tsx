@@ -2,16 +2,17 @@
 
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
-import React, { useContext, useEffect, useState, useCallback } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CourseItem from "./CourseItem";
 import { Button } from "../ui/button";
 import { Plus, RefreshCcw } from "lucide-react";
 import { CourseCountContext } from "../context/CourseCountContext";
 import Link from "next/link";
 
-// Define a proper course type
+// Define a proper Course type
 interface Course {
   courseId: string;
+  courseName: string;
   courseLayout: {
     chapters: { chapter_title?: string; chapterTitle?: string }[];
   };
@@ -23,38 +24,37 @@ const CourseCard = () => {
   const [courseCard, setCourseCard] = useState<Course[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const { totalCourse, setTotalCourse } = useContext(CourseCountContext) as {
-    totalCourse: number;
-    setTotalCourse: (val: number) => void;
-  };
+  // Use optional chaining for context
+  const courseContext = useContext(CourseCountContext);
 
-  // useCallback to fix missing dependency
-  const GetCourseCard = useCallback(async () => {
-    if (!user) return;
+  useEffect(() => {
+    if (user) {
+      GetCourseCard();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
+  const GetCourseCard = async () => {
     setLoading(true);
     try {
-      const result = await axios.post("/api/courses", {
+      const result = await axios.post<{ result: Course[] }>("/api/courses", {
         createdBy: user?.primaryEmailAddress?.emailAddress,
       });
       setCourseCard(result.data.result);
-      setTotalCourse(result.data.result?.length);
-    } catch (err) {
-      console.error("Error fetching courses:", err);
+      courseContext?.setTotalCourse?.(result.data.result?.length ?? 0);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
     } finally {
       setLoading(false);
     }
-  }, [user, setTotalCourse]);
-
-  useEffect(() => {
-    GetCourseCard();
-  }, [GetCourseCard]);
+  };
 
   return (
     <>
-      {/* Mobile create button */}
+      {/* Mobile "Create Course" Button */}
       <div className="md:hidden block space-y-2 mt-4">
-        {totalCourse < 10 ? (
-          <Link href={`/create`} className="w-full">
+        {courseContext?.totalCourse! < 10 ? (
+          <Link href="/create" className="w-full">
             <Button className="w-full gap-2 bg-white text-black hover:bg-neutral-200 shadow-md">
               <Plus /> Create New Course
             </Button>
@@ -69,7 +69,7 @@ const CourseCard = () => {
         </span>
       </div>
 
-      {/* Courses list */}
+      {/* Courses Section */}
       <div className="md:mt-10 mt-4">
         <h2 className="text-2xl font-bold text-white flex justify-between mb-4">
           Your Courses
@@ -99,7 +99,10 @@ const CourseCard = () => {
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 mt-2 gap-5">
             {loading
               ? Array.from({ length: 6 }).map((_, i) => (
-                  <div key={i} className="h-56 w-full bg-neutral-800 rounded-lg animate-pulse" />
+                  <div
+                    key={i}
+                    className="h-56 w-full bg-neutral-800 rounded-lg animate-pulse"
+                  />
                 ))
               : courseCard.map((course, index) => <CourseItem course={course} key={index} />)}
           </div>
