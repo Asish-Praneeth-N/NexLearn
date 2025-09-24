@@ -10,11 +10,16 @@ import { CourseCountContext } from "../context/CourseCountContext";
 import Link from "next/link";
 
 // Define a proper Course type
+interface Chapter {
+  chapter_title?: string;
+  chapterTitle?: string;
+}
+
 interface Course {
   courseId: string;
   courseName: string;
   courseLayout: {
-    chapters: { chapter_title?: string; chapterTitle?: string }[];
+    chapters: Chapter[];
   };
   [key: string]: any;
 }
@@ -24,7 +29,6 @@ const CourseCard = () => {
   const [courseCard, setCourseCard] = useState<Course[]>([]);
   const [loading, setLoading] = useState(false);
 
-  // Use optional chaining for context
   const courseContext = useContext(CourseCountContext);
 
   useEffect(() => {
@@ -40,20 +44,27 @@ const CourseCard = () => {
       const result = await axios.post<{ result: Course[] }>("/api/courses", {
         createdBy: user?.primaryEmailAddress?.emailAddress,
       });
-      setCourseCard(result.data.result);
-      courseContext?.setTotalCourse?.(result.data.result?.length ?? 0);
-    } catch (error) {
-      console.error("Error fetching courses:", error);
+      const courses = result.data.result ?? [];
+      setCourseCard(courses);
+
+      // Safe update using optional chaining and fallback
+      if (courseContext?.setTotalCourse) {
+        courseContext.setTotalCourse(courses.length);
+      }
+    } catch (err) {
+      console.error("Error fetching courses:", err);
     } finally {
       setLoading(false);
     }
   };
 
+  const totalCourse = courseContext?.totalCourse ?? 0;
+
   return (
     <>
       {/* Mobile "Create Course" Button */}
       <div className="md:hidden block space-y-2 mt-4">
-        {courseContext?.totalCourse! < 10 ? (
+        {totalCourse < 10 ? (
           <Link href="/create" className="w-full">
             <Button className="w-full gap-2 bg-white text-black hover:bg-neutral-200 shadow-md">
               <Plus /> Create New Course
