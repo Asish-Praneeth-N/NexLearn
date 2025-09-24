@@ -14,17 +14,23 @@ const FlashcardItem = ({ isFlipped, handleClick, flashcard }: FlashcardItemProps
   return (
     <div className="flex justify-center">
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
-        {/* Front Side */}
+        {/* Front Side (Black with White Border & Shadow) */}
         <div
-          className="p-4 bg-neutral-900 text-white flex items-center justify-center text-center rounded-lg cursor-pointer shadow-lg h-[250px] w-[250px] md:h-[350px] md:w-[350px] hover:bg-neutral-800 transition-colors"
+          className="p-4 bg-black text-white flex items-center justify-center text-center 
+                     rounded-lg cursor-pointer h-[250px] w-[250px] md:h-[350px] md:w-[350px] 
+                     border border-white shadow-[0_0_20px_rgba(255,255,255,0.4)] 
+                     hover:opacity-80 transition-all"
           onClick={handleClick}
         >
           <h2 className="text-lg md:text-2xl font-medium">{flashcard?.front}</h2>
         </div>
 
-        {/* Back Side */}
+        {/* Back Side (White with Black Border & Shadow) */}
         <div
-          className="p-4 bg-neutral-800 text-white flex items-center justify-center text-center rounded-lg cursor-pointer shadow-lg h-[250px] w-[250px] md:h-[350px] md:w-[350px] hover:bg-neutral-700 transition-colors"
+          className="p-4 bg-white text-black flex items-center justify-center text-center 
+                     rounded-lg cursor-pointer h-[250px] w-[250px] md:h-[350px] md:w-[350px] 
+                     border border-black shadow-[0_0_20px_rgba(0,0,0,0.4)] 
+                     hover:opacity-80 transition-all"
           onClick={handleClick}
         >
           <h2 className="text-lg md:text-2xl font-medium">{flashcard?.back}</h2>

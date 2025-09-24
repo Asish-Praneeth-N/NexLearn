@@ -24,12 +24,16 @@ const ChapterList = ({ course }: ChapterListProps) => {
           ) => (
             <div
               key={chapter?.chapter_number || index}
-              className="flex gap-4 items-start p-4 border border-neutral-800 shadow-md rounded-lg cursor-pointer bg-neutral-900 hover:bg-neutral-800 transition-colors"
+              className="flex gap-4 items-start p-4 border border-white/20 shadow-md rounded-lg cursor-pointer bg-black hover:bg-white/10 transition-colors"
             >
-              <h2 className="text-2xl">📖</h2>
+              <h2 className="text-2xl text-white">📖</h2>
               <div>
-                <h2 className="font-medium text-white">{chapter?.chapter_title}</h2>
-                <p className="text-neutral-400 text-sm mt-1">{chapter?.summary}</p>
+                <h2 className="font-medium text-white">
+                  {chapter?.chapter_title}
+                </h2>
+                <p className="text-white/70 text-sm mt-1">
+                  {chapter?.summary}
+                </p>
               </div>
             </div>
           )

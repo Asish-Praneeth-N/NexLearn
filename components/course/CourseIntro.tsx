@@ -9,7 +9,7 @@ interface CourseIntroProps {
 
 const CourseIntro = ({ course }: CourseIntroProps) => {
   return (
-    <div className="flex gap-5 items-center p-6 md:p-10 border border-neutral-800 rounded-lg shadow-md bg-neutral-900 hover:bg-neutral-800 transition-colors">
+    <div className="flex gap-5 items-center p-6 md:p-10 border border-white/20 rounded-lg shadow-md bg-black hover:bg-white/10 transition-colors">
       <Image
         src={"/course.png"}
         width={70}
@@ -21,7 +21,7 @@ const CourseIntro = ({ course }: CourseIntroProps) => {
         <h2 className="font-bold md:text-2xl text-white text-lg">
           {course?.courseLayout.course_title}
         </h2>
-        <p className="line-clamp-2 text-neutral-400 md:block hidden mt-1">
+        <p className="line-clamp-2 text-white/70 md:block hidden mt-1">
           {course?.courseLayout?.course_summary}
         </p>
         <h2 className="mt-3 text-sm md:text-lg text-white">
