@@ -24,6 +24,11 @@ interface Course {
   [key: string]: any;
 }
 
+// Define the API response type
+interface CoursesResponse {
+  result: Course[];
+}
+
 const CourseCard = () => {
   const { user } = useUser();
   const [courseCard, setCourseCard] = useState<Course[]>([]);
@@ -41,13 +46,13 @@ const CourseCard = () => {
   const GetCourseCard = async () => {
     setLoading(true);
     try {
-      const result = await axios.post<{ result: Course[] }>("/api/courses", {
+      const result = await axios.post<CoursesResponse>("/api/courses", {
         createdBy: user?.primaryEmailAddress?.emailAddress,
       });
+
       const courses = result.data.result ?? [];
       setCourseCard(courses);
 
-      // Safe update using optional chaining and fallback
       if (courseContext?.setTotalCourse) {
         courseContext.setTotalCourse(courses.length);
       }
