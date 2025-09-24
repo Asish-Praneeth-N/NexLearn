@@ -1,11 +1,16 @@
 "use client";
 
+import React, { ReactNode, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
-import React, { useEffect } from "react";
 import axios from "axios";
 import { useRouter, usePathname } from "next/navigation";
+import { CourseCountProvider } from "../context/CourseCountContext";
 
-function Provider({ children }: { children: React.ReactNode }) {
+interface ProviderProps {
+  children: ReactNode;
+}
+
+const Provider = ({ children }: ProviderProps) => {
   const { isSignedIn, user } = useUser();
   const router = useRouter();
   const pathname = usePathname();
@@ -24,12 +29,16 @@ function Provider({ children }: { children: React.ReactNode }) {
       }
 
       CheckIsNewUser().then(() => {
-        if (userEmail && userEmail === process.env.NEXT_PUBLIC_ADMIN_EMAIL && !pathname.startsWith("/analytics")) {
+        if (
+          userEmail &&
+          userEmail === process.env.NEXT_PUBLIC_ADMIN_EMAIL &&
+          !pathname.startsWith("/analytics")
+        ) {
           router.push("/analytics");
         }
       });
     }
- }, [isSignedIn, user, router, pathname]);
+  }, [isSignedIn, user, router, pathname]);
 
   const CheckIsNewUser = async () => {
     try {
@@ -40,7 +49,7 @@ function Provider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  return <div>{children}</div>;
-}
+  return <CourseCountProvider>{children}</CourseCountProvider>;
+};
 
 export default Provider;

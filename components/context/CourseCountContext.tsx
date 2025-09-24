@@ -1,7 +1,19 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client";
+import React, { createContext, useState, ReactNode } from "react";
 
-import { createContext } from "react";
+interface CourseCountContextType {
+  totalCourse: number;
+  setTotalCourse: React.Dispatch<React.SetStateAction<number>>;
+}
 
-// @ts-expect-error
-export const CourseCountContext = createContext();
+export const CourseCountContext = createContext<CourseCountContextType | undefined>(undefined);
+
+export const CourseCountProvider = ({ children }: { children: ReactNode }) => {
+  const [totalCourse, setTotalCourse] = useState(0);
+
+  return (
+    <CourseCountContext.Provider value={{ totalCourse, setTotalCourse }}>
+      {children}
+    </CourseCountContext.Provider>
+  );
+};

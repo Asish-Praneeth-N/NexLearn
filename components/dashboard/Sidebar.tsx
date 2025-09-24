@@ -19,9 +19,11 @@ const Sidebar: React.FC<SidebarProps> = ({ closeSidebar }) => {
     { name: "Upgrade", icon: Shield, path: "/dashboard/upgrade" },
   ];
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  const { totalCourse } = useContext(CourseCountContext);
+  // Properly consume CourseCountContext
+  const context = useContext(CourseCountContext);
+  if (!context) throw new Error("Sidebar must be used within a CourseCountProvider");
+
+  const { totalCourse } = context;
   const progressValue = (totalCourse / 10) * 100;
   const path = usePathname();
 
@@ -52,12 +54,11 @@ const Sidebar: React.FC<SidebarProps> = ({ closeSidebar }) => {
               {MenuList.map((menu, index) => (
                 <Link href={menu.path} key={index}>
                   <div
-                    className={`flex gap-3 items-center p-3 rounded-xl cursor-pointer transition-all 
-                      ${
-                        path === menu.path
-                          ? "bg-neutral-700 text-white font-semibold"
-                          : "hover:bg-neutral-800 text-neutral-300"
-                      }`}
+                    className={`flex gap-3 items-center p-3 rounded-xl cursor-pointer transition-all ${
+                      path === menu.path
+                        ? "bg-neutral-700 text-white font-semibold"
+                        : "hover:bg-neutral-800 text-neutral-300"
+                    }`}
                   >
                     <menu.icon className="w-5 h-5" />
                     <h2>{menu.name}</h2>
@@ -105,12 +106,11 @@ const Sidebar: React.FC<SidebarProps> = ({ closeSidebar }) => {
             {MenuList.map((menu, index) => (
               <Link href={menu.path} key={index} onClick={closeSidebar}>
                 <div
-                  className={`flex gap-3 items-center p-3 rounded-xl cursor-pointer transition-all 
-                    ${
-                      path === menu.path
-                        ? "bg-neutral-700 text-white font-semibold"
-                        : "hover:bg-neutral-800 text-neutral-300"
-                    }`}
+                  className={`flex gap-3 items-center p-3 rounded-xl cursor-pointer transition-all ${
+                    path === menu.path
+                      ? "bg-neutral-700 text-white font-semibold"
+                      : "hover:bg-neutral-800 text-neutral-300"
+                  }`}
                 >
                   <menu.icon className="w-5 h-5" />
                   <h2>{menu.name}</h2>
@@ -120,8 +120,8 @@ const Sidebar: React.FC<SidebarProps> = ({ closeSidebar }) => {
           </div>
         </div>
 
-        {/* Available Credits - Mobile Slightly Higher */}
-        <div className="mt-[380px] p-5 bg-neutral-800 rounded-xl shadow-sm">
+        {/* Available Credits - Mobile Slightly Above Bottom (~30px) */}
+        <div className="mt-[390px] mb-[30px] p-5 bg-neutral-800 rounded-xl shadow-sm">
           <h2 className="text-lg font-semibold text-white">
             Available Credits: {10 - totalCourse}
           </h2>
