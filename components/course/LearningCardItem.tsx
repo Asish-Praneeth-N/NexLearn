@@ -45,19 +45,20 @@ const LearningCardItem = ({
       chapters = (chapter.chapter_title || chapter.chapterTitle) + ", " + chapters;
     });
 
-    try {
-      await axios.post("/api/generate-study-type", {
-        courseId: course?.courseId,
-        type: item.type,
-        chapters: chapters,
-      });
-      toast.success("Content generation started!");
-      setTimeout(refreshData, 3000);
-    } catch {
-      toast.error("Generation failed");
-    } finally {
-      setLoading(false);
-    }
+   try {
+  await axios.post("/api/generate-study-type", {
+    courseId: course?.courseId,
+    type: item.type,
+    chapters: chapters,
+  });
+  toast.success("Content generation started!");
+  setTimeout(refreshData, 3000);
+} catch (_error) {
+  toast.error("Generation failed");
+} finally {
+  setLoading(false);
+}
+
   };
 
   const isContentAvailable = studyTypeContent?.[item.type]?.length > 0;
