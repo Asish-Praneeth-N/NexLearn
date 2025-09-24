@@ -21,8 +21,6 @@ interface Course {
   courseLayout: {
     chapters: Chapter[];
   };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
 }
 
 // API request payload type
