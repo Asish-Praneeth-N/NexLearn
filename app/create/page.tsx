@@ -39,14 +39,13 @@ const Create = () => {
     const courseId = uuidv4();
     setLoading(true);
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const result = await axios.post("/api/generate-course-outline", {
+      await axios.post("/api/generate-course-outline", {
         courseId: courseId,
         ...formData,
         createdBy: user?.primaryEmailAddress?.emailAddress,
       });
       toast(
-        "Your course content is being generated, please wait for a moment or try clicking the refresh button"
+        "Your course content is being generated, please wait or try clicking the refresh button"
       );
       router.replace("/dashboard");
     } catch (error) {
@@ -85,34 +84,38 @@ const Create = () => {
 
       {/* Navigation Buttons */}
       <div className="flex justify-between w-full mt-32">
-        {step !== 0 ? (
-          <Button
-            onClick={() => setStep(step - 1)}
-            variant="outline"
-            className="border border-white text-white hover:bg-white hover:text-black transition-colors"
-          >
-            Previous
-          </Button>
-        ) : (
-          <div />
-        )}
+        {/* Previous Button */}
+        <div>
+          {step !== 0 && (
+            <Button
+              onClick={() => setStep(step - 1)}
+              variant="outline"
+              className="border border-white text-white hover:bg-white hover:text-black transition-colors"
+            >
+              Previous
+            </Button>
+          )}
+        </div>
 
-        {step === 0 ? (
-          <Button
-            onClick={() => setStep(step + 1)}
-            className="bg-black border border-white text-white hover:bg-white hover:text-black transition-colors"
-          >
-            Next
-          </Button>
-        ) : (
-          <Button
-            onClick={GenerateCourseOutline}
-            disabled={loading}
-            className="bg-black border border-white text-white hover:bg-white hover:text-black transition-colors flex items-center gap-2"
-          >
-            {loading ? <Loader className="animate-spin" /> : "Generate"}
-          </Button>
-        )}
+        {/* Next / Generate Button */}
+        <div>
+          {step === 0 ? (
+            <Button
+              onClick={() => setStep(step + 1)}
+              className="bg-black border border-white text-white hover:bg-white hover:text-black transition-colors"
+            >
+              Next
+            </Button>
+          ) : (
+            <Button
+              onClick={GenerateCourseOutline}
+              disabled={loading}
+              className="bg-black border border-white text-white hover:bg-white hover:text-black transition-colors flex items-center gap-2"
+            >
+              {loading ? <Loader className="animate-spin" /> : "Generate"}
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
