@@ -27,12 +27,20 @@ const LearningCardItem = ({
   const [loading, setLoading] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
 
-  // Trigger spinner for 3 seconds and optionally call a callback
-  const triggerSpinner = (callback?: () => void) => {
+  // Spinner for Generate (no navigation)
+  const triggerGenerateSpinner = () => {
     setShowSpinner(true);
     setTimeout(() => {
       setShowSpinner(false);
-      if (callback) callback();
+    }, 3000);
+  };
+
+  // Spinner for View (with navigation)
+  const triggerViewSpinner = (path: string) => {
+    setShowSpinner(true);
+    setTimeout(() => {
+      setShowSpinner(false);
+      router.push(path);
     }, 3000);
   };
 
@@ -40,11 +48,12 @@ const LearningCardItem = ({
   const GenerateContent = async () => {
     toast("Generating content...");
     setLoading(true);
-    triggerSpinner();
+    triggerGenerateSpinner();
 
     let chapters = "";
     course?.courseLayout.chapters.forEach((chapter: any) => {
-      chapters = (chapter.chapter_title || chapter.chapterTitle) + ", " + chapters;
+      chapters =
+        (chapter.chapter_title || chapter.chapterTitle) + ", " + chapters;
     });
 
     try {
@@ -54,7 +63,7 @@ const LearningCardItem = ({
         chapters,
       });
       toast.success("Content generation started!");
-      setTimeout(refreshData, 3000); // refresh after 3s
+      setTimeout(refreshData, 3000);
     } catch {
       toast.error("Generation failed");
     } finally {
@@ -64,11 +73,15 @@ const LearningCardItem = ({
 
   const isContentAvailable = studyTypeContent?.[item.type]?.length > 0;
 
-  // View handler with spinner then navigation
+  // View handler
   const handleView = () => {
-    triggerSpinner(() => {
-      router.push(`/course/${course.courseId}/flashcards`);
-    });
+    // ✅ navigate to correct page depending on type
+    const path =
+      item.type === "flashcard"
+        ? `/course/${course.courseId}/flashcards`
+        : `/course/${course.courseId}/${item.type}`;
+
+    triggerViewSpinner(path);
   };
 
   return (
@@ -79,7 +92,9 @@ const LearningCardItem = ({
       {/* Availability Badge */}
       <h2
         className={`p-1 px-2 rounded-full text-[10px] mb-2 ${
-          isContentAvailable ? "bg-green-600 text-white" : "bg-gray-600 text-white"
+          isContentAvailable
+            ? "bg-green-600 text-white"
+            : "bg-gray-600 text-white"
         }`}
       >
         {isContentAvailable ? "Available" : "Unavailable"}
@@ -92,7 +107,9 @@ const LearningCardItem = ({
       <h2 className="font-medium mt-3 text-white">{item.name}</h2>
 
       {/* Description */}
-      <p className="text-gray-300 mb-4 text-center text-sm flex-grow">{item.desc}</p>
+      <p className="text-gray-300 mb-4 text-center text-sm flex-grow">
+        {item.desc}
+      </p>
 
       {/* Loader Overlay */}
       {showSpinner && (
