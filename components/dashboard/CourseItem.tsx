@@ -20,10 +20,10 @@ const CourseItem = ({ course }: CourseItemProps) => {
 
   const handleViewClick = () => {
     setIsNavigating(true); // Show spinner when button is clicked
-    // Delay navigation by 4 seconds
+    // Delay navigation by 3 seconds
     setTimeout(() => {
       router.push(`/course/${course?.courseId}`); // Navigate to the course page
-    }, 3000); // 4000ms = 4 seconds
+    }, 3000); // 3000ms = 3 seconds
   };
 
   return (

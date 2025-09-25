@@ -95,18 +95,18 @@ const Notes = () => {
     
     return cleanedContent
       .replace(/<pre>\s*<code>([\s\S]*?)<\/code>\s*<\/pre>/g, 
-        '<div class="code-block bg-black text-white p-6 rounded-lg my-6 overflow-x-auto border border-gray-800"><pre><code>$1</code></pre></div>')
+        '<div class="code-block bg-black text-white p-6 rounded-lg my-6 overflow-x-auto border border-white/80">$1</div>')
       .replace(/<code(?![^>]*class)(.*?)>(.*?)<\/code>/g, 
-        '<code class="inline-code bg-gray-900 text-gray-100 px-3 py-1 rounded text-sm font-mono border border-gray-700">$2</code>')
-      .replace(/<h1([^>]*)>/g, '<h1 class="text-4xl font-bold text-white mb-8 pb-4 border-b-2 border-white"$1>')
+        '<code class="inline-code bg-black text-white px-3 py-1 rounded text-sm font-mono border border-white/80">$2</code>')
+      .replace(/<h1([^>]*)>/g, '<h1 class="text-4xl font-bold text-white mb-8 pb-4 border-b-2 border-white/80"$1>')
       .replace(/<h2([^>]*)>/g, '<h2 class="text-3xl font-semibold text-white mt-10 mb-6"$1>')
-      .replace(/<h3([^>]*)>/g, '<h3 class="text-2xl font-medium text-gray-200 mt-8 mb-4"$1>')
-      .replace(/<p([^>]*)>/g, '<p class="text-gray-300 leading-relaxed mb-6 text-lg"$1>')
+      .replace(/<h3([^>]*)>/g, '<h3 class="text-2xl font-medium text-white/90 mt-8 mb-4"$1>')
+      .replace(/<p([^>]*)>/g, '<p class="text-white/90 leading-relaxed mb-6 text-lg"$1>')
       .replace(/<strong([^>]*)>/g, '<strong class="font-semibold text-white"$1>')
-      .replace(/<em([^>]*)>/g, '<em class="italic text-gray-200"$1>')
+      .replace(/<em([^>]*)>/g, '<em class="italic text-white/90"$1>')
       .replace(/<ul([^>]*)>/g, '<ul class="list-disc pl-8 mb-6 space-y-3"$1>')
       .replace(/<ol([^>]*)>/g, '<ol class="list-decimal pl-8 mb-6 space-y-3"$1>')
-      .replace(/<li([^>]*)>/g, '<li class="text-gray-300 text-lg"$1>');
+      .replace(/<li([^>]*)>/g, '<li class="text-white/90 text-lg"$1>');
   };
 
   const downloadStyledPDF = async () => {
@@ -127,17 +127,17 @@ const Notes = () => {
       tempContainer.style.left = '-9999px';
       tempContainer.style.top = '0';
       tempContainer.style.width = '210mm';
-      tempContainer.style.backgroundColor = 'white';
+      tempContainer.style.backgroundColor = '#000000';
       tempContainer.style.fontFamily = 'system-ui, -apple-system, sans-serif';
       
       // Create the styled content
       tempContainer.innerHTML = `
-        <div style="padding: 40px; max-width: 800px; margin: 0 auto; background: white;">
-          <div style="text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px solid #000000;">
-            <h1 style="font-size: 28px; font-weight: bold; color: #000000; margin: 0; line-height: 1.2;">
+        <div style="padding: 40px; max-width: 800px; margin: 0 auto; background: #000000;">
+          <div style="text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px solid #ffffff;">
+            <h1 style="font-size: 28px; font-weight: bold; color: #ffffff; margin: 0; line-height: 1.2;">
               ${title}
             </h1>
-            <p style="color: #666666; margin-top: 8px; font-size: 14px;">
+            <p style="color: #ffffff; margin-top: 8px; font-size: 14px;">
               Chapter ${selectedChapter + 1} of ${notes.length}
             </p>
           </div>
@@ -155,52 +155,52 @@ const Notes = () => {
         .pdf-content h1 {
           font-size: 24px !important;
           font-weight: bold !important;
-          color: #000000 !important;
+          color: #ffffff !important;
           margin: 30px 0 20px 0 !important;
           padding-bottom: 10px !important;
-          border-bottom: 2px solid #000000 !important;
+          border-bottom: 2px solid #ffffff !important;
           page-break-after: avoid !important;
         }
         .pdf-content h2 {
           font-size: 20px !important;
           font-weight: 600 !important;
-          color: #000000 !important;
+          color: #ffffff !important;
           margin: 25px 0 15px 0 !important;
           page-break-after: avoid !important;
         }
         .pdf-content h3 {
           font-size: 18px !important;
           font-weight: 500 !important;
-          color: #333333 !important;
+          color: #ffffff !important;
           margin: 20px 0 12px 0 !important;
           page-break-after: avoid !important;
         }
         .pdf-content p {
-          color: #333333 !important;
+          color: #ffffff !important;
           line-height: 1.7 !important;
           margin-bottom: 16px !important;
           text-align: justify !important;
         }
         .pdf-content strong {
           font-weight: 600 !important;
-          color: #000000 !important;
+          color: #ffffff !important;
         }
         .pdf-content em {
           font-style: italic !important;
-          color: #666666 !important;
+          color: #ffffff !important;
         }
         .pdf-content ul, .pdf-content ol {
           margin: 16px 0 16px 24px !important;
           padding: 0 !important;
         }
         .pdf-content li {
-          color: #333333 !important;
+          color: #ffffff !important;
           margin-bottom: 8px !important;
           line-height: 1.6 !important;
         }
         .pdf-content .code-block {
-          background: #f5f5f5 !important;
-          border: 1px solid #cccccc !important;
+          background: #000000 !important;
+          border: 1px solid #ffffff !important;
           border-radius: 6px !important;
           padding: 16px !important;
           margin: 20px 0 !important;
@@ -209,15 +209,16 @@ const Notes = () => {
           line-height: 1.5 !important;
           overflow-x: auto !important;
           page-break-inside: avoid !important;
+          color: #ffffff !important;
         }
         .pdf-content .inline-code {
-          background: #f5f5f5 !important;
-          color: #000000 !important;
+          background: #000000 !important;
+          color: #ffffff !important;
           padding: 2px 6px !important;
           border-radius: 4px !important;
           font-family: 'Courier New', monospace !important;
           font-size: 13px !important;
-          border: 1px solid #cccccc !important;
+          border: 1px solid #ffffff !important;
         }
         .pdf-content pre {
           margin: 0 !important;
@@ -226,6 +227,7 @@ const Notes = () => {
         }
         .pdf-content code {
           font-family: 'Courier New', monospace !important;
+          color: #ffffff !important;
         }
       `;
       document.head.appendChild(style);
@@ -238,7 +240,7 @@ const Notes = () => {
         scale: 2,
         useCORS: true,
         allowTaint: true,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#000000',
         width: tempContainer.scrollWidth,
         height: tempContainer.scrollHeight,
         onclone: (clonedDoc) => {
@@ -309,15 +311,15 @@ const Notes = () => {
   return (
     <div className="flex lg:flex-row flex-col min-h-screen bg-black">
       {/* Sidebar */}
-      <div className="w-96 bg-gray-900 border-r border-gray-800 shadow-2xl overflow-hidden">
-        <div className="p-6 border-b border-gray-800 bg-black">
+      <div className="lg:w-80 w-full bg-black border-r border-white/80 shadow-lg overflow-hidden lg:sticky lg:top-0 lg:h-screen">
+        <div className="p-4 border-b border-white/80 bg-black">
           <div className="flex items-center gap-3">
             <BookOpen className="h-6 w-6 text-white" />
             <h2 className="text-xl font-semibold text-white">Course Chapters</h2>
           </div>
         </div>
-        <ScrollArea className="h-[calc(100vh-80px)] pb-20">
-          <div className="p-6 space-y-4">
+        <ScrollArea className="lg:h-[calc(100vh-72px)] h-auto pb-6">
+          <div className="p-4 space-y-3">
             {notes.map((note, index) => {
               const titleMatch = note.notes.match(/<h1[^>]*>(.*?)<\/h1>/);
               const title = titleMatch ? 
@@ -327,24 +329,20 @@ const Notes = () => {
               return (
                 <Card
                   key={index}
-                  className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-white/10 border ${
+                  className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-white/20 border border-white/80 ${
                     selectedChapter === index 
-                      ? 'bg-white border-white shadow-lg shadow-white/20' 
-                      : 'bg-gray-800 border-gray-700 hover:bg-gray-750 hover:border-gray-600'
+                      ? 'bg-white/10 border-white shadow-md shadow-white/30' 
+                      : 'bg-black hover:bg-white/5 hover:border-white'
                   }`}
                   onClick={() => setSelectedChapter(index)}
                 >
-                  <CardHeader className="pb-3">
-                    <CardTitle className={`text-sm font-medium transition-colors ${
-                      selectedChapter === index ? 'text-black' : 'text-white'
-                    }`}>
+                  <CardHeader className="pb-2">
+                    <CardTitle className={`text-sm font-medium text-white`}>
                       {title}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <div className={`text-xs transition-colors ${
-                      selectedChapter === index ? 'text-gray-600' : 'text-gray-400'
-                    }`}>
+                    <div className={`text-xs text-white/90`}>
                       Chapter {index + 1} of {notes.length}
                     </div>
                   </CardContent>
@@ -357,14 +355,14 @@ const Notes = () => {
 
       {/* Main Content */}
       <div className="flex-1 overflow-hidden bg-black">
-        <div className="max-w-6xl mx-auto px-12 py-4">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6">
           <div className="flex justify-end mb-4">
             <Button
               onClick={downloadStyledPDF}
-              className={`transition-all duration-200 ${
+              className={`transition-all duration-300 ${
                 isPdfGenerating 
-                  ? 'bg-gray-600 cursor-not-allowed' 
-                  : 'bg-white hover:bg-gray-200 text-black hover:shadow-lg hover:shadow-white/20'
+                  ? 'bg-black/50 cursor-not-allowed text-white border-white/80' 
+                  : 'bg-white hover:bg-black text-black hover:text-white border-white/80 hover:border-white shadow-md hover:shadow-white/30'
               }`}
               size="sm"
               disabled={notes.length === 0 || isPdfGenerating}
@@ -373,10 +371,10 @@ const Notes = () => {
               {isPdfGenerating ? 'Generating PDF...' : 'Download PDF'}
             </Button>
           </div>
-          <ScrollArea className="h-screen">
+          <ScrollArea className="lg:h-screen h-auto">
             {notes.length > 0 && (
-              <div className="bg-black rounded-xl shadow-2xl border border-gray-800">
-                <div className="p-12">
+              <div className="bg-black rounded-xl shadow-lg border border-white/80">
+                <div className="p-6 sm:p-8">
                   <div 
                     className="prose prose-lg max-w-none prose-invert"
                     dangerouslySetInnerHTML={{ 
@@ -388,8 +386,8 @@ const Notes = () => {
             )}
             {notes.length === 0 && (
               <div className="text-center py-16">
-                <BookOpen className="h-20 w-20 text-gray-600 mx-auto mb-6" />
-                <p className="text-gray-400 text-xl">Loading course content...</p>
+                <BookOpen className="h-16 w-16 text-white/90 mx-auto mb-6" />
+                <p className="text-white/90 text-lg">Loading course content...</p>
               </div>
             )}
           </ScrollArea>
@@ -397,18 +395,18 @@ const Notes = () => {
       </div>
 
       {/* Chat Widget */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-4 right-4 z-50">
         {!isChatOpen ? (
           <Button
             onClick={() => setIsChatOpen(true)}
-            className="h-16 w-16 rounded-full bg-white hover:bg-gray-200 text-black shadow-2xl hover:shadow-white/20 transition-all duration-300 hover:scale-110"
+            className="h-14 w-14 rounded-full bg-white hover:bg-black hover:text-white text-black shadow-lg hover:shadow-white/30 transition-all duration-300 hover:scale-105"
             size="lg"
           >
-            <MessageCircle className="h-7 w-7" />
+            <MessageCircle className="h-6 w-6" />
           </Button>
         ) : (
-          <Card className="w-96 h-96 shadow-2xl border-gray-700 bg-gray-900">
-            <CardHeader className="bg-black text-white rounded-t-lg border-b border-gray-700">
+          <Card className="w-full sm:w-80 h-[28rem] shadow-lg border-white/80 bg-black">
+            <CardHeader className="bg-black text-white rounded-t-lg border-b border-white/80">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Bot className="h-5 w-5" />
@@ -418,17 +416,17 @@ const Notes = () => {
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsChatOpen(false)}
-                  className="text-white hover:bg-gray-800 h-8 w-8 p-0 transition-all duration-200"
+                  className="text-white hover:bg-black/50 h-8 w-8 p-0 transition-all duration-200"
                 >
                   <X className="h-4 w-4" />
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="p-0 flex flex-col h-80 bg-gray-900">
+            <CardContent className="p-0 flex flex-col h-[calc(28rem-60px)] bg-black">
               <ScrollArea className="flex-1 p-4">
                 <div className="space-y-4">
                   {chatMessages.length === 0 && (
-                    <div className="text-center text-gray-400 py-8">
+                    <div className="text-center text-white/90 py-8">
                       <Bot className="h-10 w-10 mx-auto mb-3 text-white" />
                       <p className="text-sm">Ask me anything about this chapter!</p>
                     </div>
@@ -440,13 +438,13 @@ const Notes = () => {
                         message.role === 'user' ? 'justify-end' : 'justify-start'
                       }`}
                     >
-                      <div className={`flex gap-3 max-w-xs ${
+                      <div className={`flex gap-3 max-w-[80%] ${
                         message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
                       }`}>
                         <div className={`h-8 w-8 rounded-full flex items-center justify-center transition-all duration-200 ${
                           message.role === 'user' 
                             ? 'bg-white text-black' 
-                            : 'bg-gray-800 text-white border border-gray-700'
+                            : 'bg-black text-white border border-white/80'
                         }`}>
                           {message.role === 'user' ? 
                             <User className="h-4 w-4" /> : 
@@ -455,8 +453,8 @@ const Notes = () => {
                         </div>
                         <div className={`p-3 rounded-lg text-sm transition-all duration-200 ${
                           message.role === 'user'
-                            ? 'bg-white text-black shadow-lg'
-                            : 'bg-gray-800 text-white border border-gray-700'
+                            ? 'bg-white text-black shadow-md'
+                            : 'bg-black text-white border border-white/80'
                         }`}>
                           {message.content}
                         </div>
@@ -465,10 +463,10 @@ const Notes = () => {
                   ))}
                   {isLoading && (
                     <div className="flex gap-3 justify-start">
-                      <div className="h-8 w-8 rounded-full bg-gray-800 flex items-center justify-center border border-gray-700">
+                      <div className="h-8 w-8 rounded-full bg-black flex items-center justify-center border border-white/80">
                         <Bot className="h-4 w-4 text-white" />
                       </div>
-                      <div className="bg-gray-800 p-3 rounded-lg text-sm border border-gray-700">
+                      <div className="bg-black p-3 rounded-lg text-sm border border-white/80">
                         <div className="flex gap-1">
                           <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
                           <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
@@ -479,22 +477,22 @@ const Notes = () => {
                   )}
                 </div>
               </ScrollArea>
-              <Separator className="bg-gray-700" />
-              <div className="p-4 mb-2 bg-gray-900">
+              <Separator className="bg-white/80" />
+              <div className="p-4 bg-black">
                 <div className="flex gap-2">
                   <Input
                     placeholder="Ask about this chapter..."
                     value={chatInput}
                     onChange={(e) => setChatInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
-                    className="flex-1 border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:border-white transition-all duration-200"
+                    className="flex-1 border-white/80 bg-black text-white placeholder-white/70 focus:border-white transition-all duration-200"
                     disabled={isLoading}
                   />
                   <Button 
                     onClick={sendChatMessage}
                     disabled={!chatInput.trim() || isLoading}
                     size="sm"
-                    className="bg-white hover:bg-gray-200 text-black transition-all duration-200"
+                    className="bg-white hover:bg-black text-black hover:text-white border-white/80 transition-all duration-200"
                   >
                     <Send className="h-4 w-4" />
                   </Button>
@@ -509,12 +507,13 @@ const Notes = () => {
         .code-block {
           font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
           background: #000000 !important;
-          border: 1px solid #333333 !important;
+          border: 1px solid #ffffff !important;
+          border-radius: 6px;
         }
         .inline-code {
           font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-          background: #1a1a1a !important;
-          border: 1px solid #333333 !important;
+          background: #000000 !important;
+          border: 1px solid #ffffff !important;
         }
         .prose pre {
           background: transparent !important;
@@ -531,7 +530,7 @@ const Notes = () => {
           background: transparent !important;
         }
         .prose-invert {
-          color: #e5e5e5;
+          color: #ffffff;
         }
         .prose-invert h1,
         .prose-invert h2,
@@ -543,22 +542,59 @@ const Notes = () => {
           color: white;
         }
         .prose-invert blockquote {
-          border-left-color: white;
-          color: #d1d5db;
+          border-left-color: #ffffff;
+          color: #ffffff;
         }
         /* Scrollbar Styling */
         ::-webkit-scrollbar {
-          width: 8px;
+          width: 6px;
         }
         ::-webkit-scrollbar-track {
-          background: #1a1a1a;
+          background: #000000;
         }
         ::-webkit-scrollbar-thumb {
-          background: #404040;
+          background: #ffffff;
           border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-          background: #555555;
+          background: #ffffff;
+        }
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+          .lg\\:flex-row {
+            flex-direction: column !important;
+          }
+          .lg\\:w-80 {
+            width: 100% !important;
+          }
+          .lg\\:h-screen {
+            height: auto !important;
+          }
+          .lg\\:sticky {
+            position: relative !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .sm\\:w-80 {
+            width: 100% !important;
+            max-width: 90vw !important;
+          }
+          .sm\\:px-6 {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+          }
+          .p-4 {
+            padding: 0.75rem !important;
+          }
+          .p-6 {
+            padding: 1rem !important;
+          }
+          .p-8 {
+            padding: 1.25rem !important;
+          }
+          .max-w-4xl {
+            max-width: 100% !important;
+          }
         }
       `}</style>
     </div>
