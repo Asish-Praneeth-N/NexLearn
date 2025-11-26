@@ -9,24 +9,32 @@ interface CourseIntroProps {
 
 const CourseIntro = ({ course }: CourseIntroProps) => {
   return (
-    <div className="flex gap-5 items-center p-6 md:p-10 border border-white/20 rounded-lg shadow-md bg-black hover:bg-white/10 transition-colors">
+    <div className="flex gap-6 items-center p-8 glass-dark rounded-2xl shadow-xl border border-white/10 relative overflow-hidden group">
+      {/* Background Glow */}
+      <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl -z-10 group-hover:bg-indigo-500/20 transition-colors" />
+
       <Image
         src={"/course.png"}
-        width={70}
-        height={70}
+        width={90}
+        height={90}
         alt="Course Image"
-        className="rounded-md"
+        className="rounded-xl shadow-lg"
       />
-      <div className="flex-1">
-        <h2 className="font-bold md:text-2xl text-white text-lg">
+      <div className="flex-1 space-y-2">
+        <h2 className="font-bold md:text-3xl text-white tracking-tight">
           {course?.courseLayout.course_title}
         </h2>
-        <p className="line-clamp-2 text-white/70 md:block hidden mt-1">
+        <p className="line-clamp-2 text-gray-400 text-sm md:text-base leading-relaxed">
           {course?.courseLayout?.course_summary}
         </p>
-        <h2 className="mt-3 text-sm md:text-lg text-white">
-          Total Chapters: {course?.courseLayout?.chapters?.length}
-        </h2>
+        <div className="flex items-center gap-2 mt-2">
+          <span className="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/5">
+            {course?.courseLayout?.chapters?.length} Chapters
+          </span>
+          <span className="px-3 py-1 bg-indigo-500/10 rounded-full text-xs font-medium text-indigo-300 border border-indigo-500/20">
+            AI Generated
+          </span>
+        </div>
       </div>
     </div>
   );

@@ -55,12 +55,12 @@ const LearningResourceSec = ({ courseId, course }: LearningResourceSecProps) => 
   };
 
   return (
-    <div className="mt-5">
-      <h2 className="font-medium text-xl text-white">Learning Resources</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-3">
+    <div className="mt-8">
+      <h2 className="font-bold text-2xl text-white mb-6">Learning Resources</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {LearningList.map((item, index) => (
           <Link key={index} href={`/course/${courseId}${item.path}`} passHref>
-            <div className="w-full">
+            <div className="w-full transform hover:-translate-y-1 transition-transform duration-300">
               <LearningCardItem
                 item={item}
                 studyTypeContent={studyTypeContent}

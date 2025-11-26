@@ -53,12 +53,12 @@ export const GenerateNotes = inngest.createFunction(
     const { course } = event.data;
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const notesResult = await step.run("Generate Chapter Notes", async() => {
+    const notesResult = await step.run("Generate Chapter Notes", async () => {
       const Chapters = course?.courseLayout?.chapters;
       let index = 0;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      Chapters.forEach(async(chapter: any) => {
-        const PROMPT = `Generate detailed study material content for each chapter in HTML format, following a consistent structure: use <h1> with an emoji for the chapter title, provide an introduction with <p>, list key topics with <h2> and <ul> using emojis, include detailed explanations with <p> and <strong>, add examples with <pre> or <code>, highlight important notes with <strong> or <em>, and summarize exam focus areas with <h2> and <ul>; ensure the content is well-organized, visually appealing, and exam-focused, avoiding <html>, <head>, <body>, or <title> tags, for the chapters: ` + JSON.stringify(chapter);
+      Chapters.forEach(async (chapter: any) => {
+        const PROMPT = `Generate detailed study material content for each chapter in raw HTML format (do NOT use markdown code blocks or JSON). Follow a consistent structure: use <h1> with an emoji for the chapter title, provide an introduction with <p>, list key topics with <h2> and <ul> using emojis, include detailed explanations with <p> and <strong>, add examples with <pre> or <code>, highlight important notes with <strong> or <em>, and summarize exam focus areas with <h2> and <ul>; ensure the content is well-organized, visually appealing, and exam-focused, avoiding <html>, <head>, <body>, or <title> tags. Just return the HTML string directly. For the chapter: ` + JSON.stringify(chapter);
         const result = await generateNotes.sendMessage(PROMPT);
         const aiRes = result.response.text();
 
@@ -72,40 +72,40 @@ export const GenerateNotes = inngest.createFunction(
       return "Completed";
     })
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const updateCourseStatusResult = await step.run("Update Course Status", async() => {
+    const updateCourseStatusResult = await step.run("Update Course Status", async () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const result = await db.update(STUDY_MATERIAL_TABLE).set({
         status: "Ready",
-      }). where(eq(STUDY_MATERIAL_TABLE.courseId, course?.courseId));
+      }).where(eq(STUDY_MATERIAL_TABLE.courseId, course?.courseId));
       return "Success";
     });
   }
 );
 
 export const GenerateStudyContent = inngest.createFunction(
-  {id: "Generate Study Type Content"},
-  {event: "studyType.content"},
-  async ({event, step}) => {
+  { id: "Generate Study Type Content" },
+  { event: "studyType.content" },
+  async ({ event, step }) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {studyType, prompt, courseId, recordId} = event.data;
+    const { studyType, prompt, courseId, recordId } = event.data;
 
-    const AIResult = await step.run('Generating FlashCard using AI', async() => {
-      const result = 
-      studyType == "flashcard" ?
-      await GenerateStudyTypeContent.sendMessage(prompt) :
-      await GenerateQuiz.sendMessage(prompt);
+    const AIResult = await step.run('Generating FlashCard using AI', async () => {
+      const result =
+        studyType == "flashcard" ?
+          await GenerateStudyTypeContent.sendMessage(prompt) :
+          await GenerateQuiz.sendMessage(prompt);
       const aiRes = JSON.parse(result.response.text());
       return aiRes;
     });
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const DbResult = await step.run("Save Result to DB", async() => {
+    const DbResult = await step.run("Save Result to DB", async () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const result = await db.update(STUDY_TYPE_CONTENT_TABLE).set({
         content: AIResult,
         status: "Ready"
       }).where(
-          eq(STUDY_TYPE_CONTENT_TABLE.id, recordId),
+        eq(STUDY_TYPE_CONTENT_TABLE.id, recordId),
       );
 
       return "Data Inserted";

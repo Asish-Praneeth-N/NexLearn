@@ -10,18 +10,21 @@ const Welcome = () => {
     <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-6 bg-neutral-900 text-white rounded-2xl shadow-xl relative overflow-hidden border border-neutral-800"
+      transition={{ duration: 0.5 }}
+      className="p-8 glass-dark rounded-3xl shadow-2xl relative overflow-hidden border border-white/10 group"
     >
-      {/* Subtle overlay for depth */}
-      <div className="absolute inset-0 bg-white/5 backdrop-blur-sm rounded-2xl pointer-events-none" />
-      
-      <h1 className="relative text-2xl md:text-4xl font-extrabold mb-2">
-        👋 Welcome, {user?.fullName}!
-      </h1>
-      <p className="relative md:text-lg text-sm text-neutral-400">
-        We&apos;re thrilled to have you at the{" "}
-        <span className="font-semibold text-white">AI Powered Learning Hub</span>. 🚀   
-      </p>
+      {/* Animated Background Gradient */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/20 rounded-full blur-[80px] -z-10 group-hover:bg-indigo-600/30 transition-colors duration-500" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-600/20 rounded-full blur-[80px] -z-10 group-hover:bg-purple-600/30 transition-colors duration-500" />
+
+      <div className="relative z-10">
+        <h1 className="text-3xl md:text-5xl font-bold mb-3 tracking-tight">
+          Hello, <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">{user?.fullName}</span> 👋
+        </h1>
+        <p className="text-base md:text-lg text-gray-400 max-w-2xl">
+          Welcome back to your <span className="text-white font-semibold">AI Learning Hub</span>. Ready to master something new today?
+        </p>
+      </div>
     </motion.div>
   );
 };
