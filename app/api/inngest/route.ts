@@ -4,7 +4,7 @@ import { CreateNewUser, GenerateNotes, GenerateStudyContent, helloWorld } from "
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
-
+  baseUrl: "https://nex-lrn.vercel.app",
   functions: [
     helloWorld,
     CreateNewUser,
