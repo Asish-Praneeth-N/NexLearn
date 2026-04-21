@@ -12,6 +12,10 @@
   "resolutions": {
     "esbuild": "0.25.0"
   },
+  "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom"
+  },
   "dependencies": {
     "@clerk/nextjs": "^6.11.1",
     "@google/generative-ai": "^0.24.1",
