@@ -209,10 +209,11 @@ export default function NexLearnLanding() {
             >
               <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-indigo-500/20 group">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="/brain.jpg"
                   alt="NexLearn Learning Platform"
+                  width={800}
+                  height={600}
                   className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                 />
 
@@ -229,7 +230,7 @@ export default function NexLearnLanding() {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-white">Daily Goal Achieved</h3>
-                      <p className="text-gray-300">You've mastered 5 new concepts today!</p>
+                      <p className="text-gray-300">You&apos;ve mastered 5 new concepts today!</p>
                     </div>
                   </div>
                 </motion.div>
@@ -334,7 +335,7 @@ export default function NexLearnLanding() {
                     <Star key={i} className="w-5 h-5 fill-yellow-500 text-yellow-500" />
                   ))}
                 </div>
-                <p className="text-gray-300 mb-8 leading-relaxed text-lg">“{testimonial.content}”</p>
+                <p className="text-gray-300 mb-8 leading-relaxed text-lg">&ldquo;{testimonial.content}&rdquo;</p>
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center font-bold text-lg text-white">
                     {testimonial.name.split(' ').map(n => n[0]).join('')}
